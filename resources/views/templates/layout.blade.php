@@ -83,7 +83,7 @@
            @include('templates.prompt')
             <div class="w-full h-full lg:flex-1">
               <div class="w-full h-auto lg:h-full flex flex-col lg:flex-row items-start">
-                <div class="w-full lg:h-full relative overflow-hidden">
+                <div class="w-full lg:h-full relative overflow-hidden" style="z-index:1">
                  @include('templates.song')
                 </div>
                @include('templates.right-sidebar')
