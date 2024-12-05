@@ -117,9 +117,87 @@ $(document).ready(function() {
     $('input[type="text"]').on('input', function() {
         clearTimeout(searchTimeout);
         const query = $(this).val();
-        searchTimeout = setTimeout(() => {
-            loadSongs(query);
-        }, 300);
+        
+        // If search is cleared, load all songs
+        if (!query.trim()) {
+            loadSongs();
+            return;
+        }
+        
+        // Make AJAX call for search suggestions
+        $.ajax({
+            url: 'http://127.0.0.1:8081/api/song/search',
+            method: 'GET',
+            data: { title: query },
+            headers: {
+                'Accept': 'application/json',
+            },
+            success: function(response) {
+                const songList = $('#songList');
+                songList.empty();
+                
+                // Append search results
+                if (response.data && response.data.length > 0) {
+                    response.data.forEach(song => {
+                        const isPlaying = currentlyPlayingSongId === song.song_id;
+                        let created_at = new Date(song.created_at).toLocaleDateString('en-US', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        });
+
+                        songList.append(`
+                            <div class="relative w-full p-2 border-b border-zinc-800 last:border-none transition duration-500 group hover:bg-zinc-800/50 cursor-pointer flex items-center justify-between gap-2 ${isPlaying ? 'bg-zinc-800/50' : ''}" 
+                                 data-song-id="${song.song_id}">
+                                <div class="w-16 h-16 rounded-md relative transition duration-500 group cursor-pointer overflow-hidden song-trigger">
+                                    <div class="w-full h-full rounded-md relative">
+                                        <img alt="cover" loading="lazy" width="100" height="100" 
+                                             class="w-full h-full rounded-md object-cover" 
+                                             src="${song.image_url}" />
+                                        ${isPlaying ? `
+                                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                            <div class="playing-wave absolute">
+                                                <span class="stroke"></span>
+                                                <span class="stroke"></span>
+                                                <span class="stroke"></span>
+                                                <span class="stroke"></span>
+                                                <span class="stroke"></span>
+                                            </div>
+                                            <svg aria-hidden="true" viewBox="0 0 24 24" 
+                                                 class="w-8 h-8 fill-fuchsia-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                                            </svg>
+                                        </div>` : `
+                                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
+                                            <svg aria-hidden="true" viewBox="0 0 24 24" class="w-8 h-8 fill-white">
+                                                <path d="M8 5v14l11-7z"/>
+                                            </svg>
+                                        </div>`}
+                                    </div>
+                                </div>
+                                <div class="w-[70%] flex flex-1 flex-col items-start">
+                                    <p class="w-full font-semibold text-sm transition duration-500 ${isPlaying ? 'text-fuchsia-500' : 'text-neutral-300 group-hover:text-fuchsia-500'} truncate">
+                                        ${song.title}
+                                    </p>
+                                    <div class="w-full mt-1 flex items-center justify-between gap-2">
+                                        <p class="w-full text-neutral-500 text-xs flex items-center gap-1">${created_at}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                    });
+                } else {
+                    songList.append(`
+                        <div class="w-full p-4 text-center text-neutral-500">
+                            No songs found
+                        </div>
+                    `);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error searching songs:', error);
+            }
+        });
     });
 
     // Click handler for songs
