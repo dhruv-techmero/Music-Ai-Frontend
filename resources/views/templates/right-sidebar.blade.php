@@ -33,10 +33,9 @@ function loadSongs(searchQuery = '') {
             const songList = $('#songList');
             songList.empty();
             
-            // Auto-play first song if no song is currently playing
+            // Only auto-play first song if no song has ever been played
             if (!currentlyPlayingSongId && response.data.length > 0) {
                 const firstSong = response.data[0];
-                currentlyPlayingSongId = firstSong.song_id;
                 
                 // Fetch and play the first song
                 $.ajax({
@@ -46,6 +45,7 @@ function loadSongs(searchQuery = '') {
                         'Accept': 'application/json',
                     },
                     success: function(songResponse) {
+                        currentlyPlayingSongId = firstSong.song_id; // Set ID after successful fetch
                         const event = new CustomEvent('playSong', { 
                             detail: songResponse.data 
                         });
@@ -80,7 +80,7 @@ function loadSongs(searchQuery = '') {
                                         <span class="stroke"></span>
                                     </div>
                                     <svg aria-hidden="true" viewBox="0 0 24 24" 
-                                         class="w-8 h-8 fill-fuchsia-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                         class="w-8 h-8 fill-fuchsia-500 group-hover:opacity-100 transition-opacity duration-300">
                                         <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
                                     </svg>
                                 </div>` : `
@@ -145,7 +145,7 @@ $(document).ready(function() {
                             month: 'long', 
                             day: 'numeric' 
                         });
-
+                        // console.log(song.song_id)
                         songList.append(`
                             <div class="relative w-full p-2 border-b border-zinc-800 last:border-none transition duration-500 group hover:bg-zinc-800/50 cursor-pointer flex items-center justify-between gap-2 ${isPlaying ? 'bg-zinc-800/50' : ''}" 
                                  data-song-id="${song.song_id}">
@@ -205,18 +205,29 @@ $(document).ready(function() {
         const songContainer = $(this).closest('[data-song-id]');
         const songId = songContainer.data('song-id');
         
-        // If clicking the currently playing song, pause it
+        // If clicking the currently playing song, trigger pause
         if (currentlyPlayingSongId === songId) {
+            currentlyPlayingSongId = null; // Immediately update state
+            
+            // Update UI immediately
+            updateSongUI(songId, false);
+            
             const event = new CustomEvent('togglePlayPause', {
-                detail: { songId }
+                detail: { songId: songId }
             });
             window.dispatchEvent(event);
             return;
         }
         
         // Otherwise, play the new song
+        const previousSongId = currentlyPlayingSongId;
         currentlyPlayingSongId = songId;
-        loadSongs($('input[type="text"]').val());
+        
+        // Update UI immediately
+        if (previousSongId) {
+            updateSongUI(previousSongId, false);
+        }
+        updateSongUI(songId, true);
         
         $.ajax({
             url: `http://127.0.0.1:8081/api/song/?song_id=${songId}`,
@@ -233,7 +244,7 @@ $(document).ready(function() {
             error: function(xhr, status, error) {
                 console.error('Error loading song details:', error);
                 currentlyPlayingSongId = null;
-                loadSongs($('input[type="text"]').val());
+                updateSongUI(songId, false);
             }
         });
     });
@@ -242,7 +253,17 @@ $(document).ready(function() {
     window.addEventListener('songStateChanged', function(event) {
         const { songId, isPlaying } = event.detail;
         currentlyPlayingSongId = isPlaying ? songId : null;
-        loadSongs($('input[type="text"]').val());
+        
+        // Update the UI without reloading all songs
+        $('#songList').children().each(function() {
+            const songElement = $(this);
+            const currentSongId = songElement.data('song-id');
+            const isCurrentPlaying = currentSongId === currentlyPlayingSongId;
+            
+            songElement.toggleClass('bg-zinc-800/50', isCurrentPlaying);
+            songElement.find('.playing-wave').toggle(isCurrentPlaying);
+            songElement.find('svg').toggleClass('fill-fuchsia-500', isCurrentPlaying);
+        });
     });
 });
 
@@ -254,4 +275,43 @@ $.ajaxSetup({
     },
     
 });
+
+// Helper function to update song UI
+function updateSongUI(songId, isPlaying) {
+    const songElement = $(`[data-song-id="${songId}"]`);
+    
+    // Update background
+    songElement.toggleClass('bg-zinc-800/50', isPlaying);
+    
+    // Update title color
+    songElement.find('p.font-semibold')
+        .toggleClass('text-fuchsia-500', isPlaying)
+        .toggleClass('text-neutral-300', !isPlaying);
+    
+    // Update play/pause icon
+    const overlay = songElement.find('.song-trigger .absolute.inset-0');
+    if (isPlaying) {
+        overlay.html(`
+            <div class="playing-wave absolute">
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+            </div>
+            <svg aria-hidden="true" viewBox="0 0 24 24" 
+                 class="w-8 h-8 fill-fuchsia-500 group-hover:opacity-100 transition-opacity duration-300">
+                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+            </svg>
+        `);
+        overlay.removeClass('opacity-0');
+    } else {
+        overlay.html(`
+            <svg aria-hidden="true" viewBox="0 0 24 24" class="w-8 h-8 fill-white">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+        `);
+        overlay.addClass('opacity-0 group-hover:opacity-100');
+    }
+}
 </script>

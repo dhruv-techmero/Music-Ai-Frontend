@@ -120,7 +120,7 @@ document.getElementById('songContainer').innerHTML = songTemplate;
 // Update the playSong event listener
 window.addEventListener('playSong', function(event) {
     const songData = event.detail;
-    console.log('Song Data:', songData); // Debug log to check the data
+    // console.log('Song Data:', songData); // Debug log to check the data
 
     // Update both cover images (blur background and main image)
     const coverImages = document.querySelectorAll('#songContainer img[alt="cover"]');
@@ -148,7 +148,7 @@ window.addEventListener('playSong', function(event) {
     const playButton = document.querySelector('.rhap_play-pause-button');
     
     if (audioElement && playButton) {
-        console.log('Audio URL:', songData.audio_url);
+        // console.log('Audio URL:', songData.audio_url);
         audioElement.src = songData.audio_url;
         
         // Attempt to play the audio

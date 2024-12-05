@@ -23,13 +23,7 @@
         <div class="drawer-content-container w-full flex flex-col items-start gap-4">
           <div class="w-full p-2 bg-gray-500/5 rounded-lg flex items-center justify-between">
             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 px-2 inline-flex items-center gap-1 text-gray-600" for="drawer-custom-mode">Custom Mode</label>
-            <button type="button" 
-                    role="switch" 
-                    aria-checked="false" 
-                    data-state="unchecked" 
-                    value="on" 
-                    class="drawer-toggle peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input"
-                    id="drawer-custom-mode">
+            <button type="button" role="switch" aria-checked="false" data-state="unchecked" value="on" class="drawer-toggle peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input" id="drawer-custom-mode">
               <span class="drawer-toggle-knob pointer-events-none block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform duration-200"></span>
             </button>
           </div>
@@ -99,6 +93,22 @@
               <span data-state="unchecked" class="pointer-events-none block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0"></span>
             </button>
           </div>
+          <div class="w-full flex flex-col items-start space-y-2">
+            <div class="w-full flex flex-col items-start gap-2">
+              <label class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm px-2 inline-flex items-center gap-1 text-gray-600" for="Lyrics">Lyrics <span type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rc:" data-state="closed">
+                  <span>
+                    <svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-5 fill-gray-300" preserveAspectRatio="none">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M512 77C271.8 77 77 271.8 77 512s194.8 435 435 435 435-194.8 435-435S752.2 77 512 77z m-2.8 739.4c-35.4 0-64.2-28.2-64.2-62.9s28.7-62.9 64.2-62.9c35.4 0 64.2 28.2 64.2 62.9s-28.7 62.9-64.2 62.9z m172.4-355.9c-12.6 19.8-39.3 46.7-80.3 80.8-21.2 17.6-34.4 31.8-39.5 42.6-5.1 10.7-7.5 29.9-7 57.6h-91.4c-0.2-13.1-0.4-21.1-0.4-24 0-29.6 4.9-53.9 14.7-73 9.8-19.1 29.4-40.6 58.7-64.4 29.3-23.9 46.9-39.5 52.6-46.9 8.8-11.7 13.3-24.6 13.3-38.6 0-19.5-7.9-36.2-23.5-50.2-15.6-13.9-36.8-20.9-63.3-20.9-25.6 0-47 7.3-64.2 21.8-17.2 14.5-32 46.5-35.5 66.3-3.3 18.7-93.4 26.6-92.3-11.3 1.1-37.9 20.8-79 54.6-108.8 33.8-29.8 78.2-44.7 133.1-44.7 57.8 0 103.7 15.1 137.9 45.3 34.2 30.2 51.2 65.3 51.2 105.4 0.1 22.2-6.2 43.2-18.7 63z"></path>
+                    </svg>
+                  </span>
+                </span>
+              </label>
+              <div class="w-full px-2 py-1 rounded-md border border-gray-500/20 bg-gray-500/5 relative">
+                <textarea placeholder="Write your own lyrics, two verses (8 lines) for the best result" class="w-full h-20 p-1 bg-transparent border-none text-sm text-gray-600 outline-none resize-none overflow-y-auto disabled:cursor-not-allowed disabled:text-gray-1000 disabled:ring-gray-200"></textarea>
+                <div class="w-full text-xs text-gray-400 text-right">0/2999</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="mt-auto flex flex-col gap-2 p-4">
@@ -112,50 +122,33 @@
     </div>
   </div>
 </div>
-
-
 <script>
-   $(document).ready(function() {
+  $(document).ready(function() {
     // Add specific class for mobile drawer toggle switch
     $(document).on('click', '#drawer-custom-mode', function() {
-        const $switch = $(this);
-        const $knob = $switch.find('.drawer-toggle-knob');
-        const $container = $switch.closest('.drawer-content-container');
-        const $description = $container.find('.drawer-description-section');
-        const $customFields = $container.find('.drawer-custom-fields');
-        
-        const isChecked = $switch.attr('aria-checked') === 'true';
-        
-        if (!isChecked) {
-            // Switch ON
-            $switch.attr('aria-checked', 'true')
-                   .removeClass('data-[state=unchecked]:bg-input')
-                   .addClass('data-[state=checked]:bg-primary');
-            
-            $knob.attr('data-state', 'checked')
-                 .css('transform', 'translateX(16px)'); // Explicit transform
-            
-            // Content toggle
-            $description.slideUp(300);
-            $customFields.removeClass('hidden')
-                        .css('display', 'flex')
-                        .hide()
-                        .slideDown(300);
-        } else {
-            // Switch OFF
-            $switch.attr('aria-checked', 'false')
-                   .removeClass('data-[state=checked]:bg-primary')
-                   .addClass('data-[state=unchecked]:bg-input');
-            
-            $knob.attr('data-state', 'unchecked')
-                 .css('transform', 'translateX(0)'); // Reset transform
-            
-            // Content toggle
-            $customFields.slideUp(300, function() {
-                $(this).addClass('hidden');
-                $description.slideDown(300);
-            });
-        }
+      const $switch = $(this);
+      const $knob = $switch.find('.drawer-toggle-knob');
+      const $container = $switch.closest('.drawer-content-container');
+      const $description = $container.find('.drawer-description-section');
+      const $customFields = $container.find('.drawer-custom-fields');
+      const isChecked = $switch.attr('aria-checked') === 'true';
+      if (!isChecked) {
+        // Switch ON
+        $switch.attr('aria-checked', 'true').removeClass('data-[state=unchecked]:bg-input').addClass('data-[state=checked]:bg-primary');
+        $knob.attr('data-state', 'checked').css('transform', 'translateX(16px)'); // Explicit transform
+        // Content toggle
+        $description.slideUp(300);
+        $customFields.removeClass('hidden').css('display', 'flex').hide().slideDown(300);
+      } else {
+        // Switch OFF
+        $switch.attr('aria-checked', 'false').removeClass('data-[state=checked]:bg-primary').addClass('data-[state=unchecked]:bg-input');
+        $knob.attr('data-state', 'unchecked').css('transform', 'translateX(0)'); // Reset transform
+        // Content toggle
+        $customFields.slideUp(300, function() {
+          $(this).addClass('hidden');
+          $description.slideDown(300);
+        });
+      }
     });
-});
+  });
 </script>
