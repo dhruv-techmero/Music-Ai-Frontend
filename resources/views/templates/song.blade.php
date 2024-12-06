@@ -1,6 +1,36 @@
 <div id="songContainer"></div>
 
 <script>
+// Add this new event listener near the top of your script
+window.addEventListener('togglePlayPause', function(event) {
+    const audioElement = document.querySelector('audio');
+    if (audioElement) {
+        if (audioElement.paused) {
+            audioElement.play().then(() => {
+                // Dispatch event to update UI
+                dispatchSongStateEvent(true);
+            }).catch(error => {
+                console.error('Error playing audio:', error);
+            });
+        } else {
+            audioElement.pause();
+            // Dispatch event to update UI
+            dispatchSongStateEvent(false);
+        }
+    }
+});
+
+// Add this helper function to dispatch song state changes
+function dispatchSongStateEvent(isPlaying) {
+    const songStateEvent = new CustomEvent('songStateChanged', {
+        detail: {
+            songId: currentlyPlayingSongId,
+            isPlaying: isPlaying
+        }
+    });
+    window.dispatchEvent(songStateEvent);
+}
+
 const songTemplate = `
   <div class="w-full h-[400px] lg:h-[90%] p-4 pb-32 lg:p-10 overflow-y-auto">
     <div class="w-full">
@@ -117,9 +147,13 @@ const songTemplate = `
 // Add the template to the container when page loads
 document.getElementById('songContainer').innerHTML = songTemplate;
 
-// Update the playSong event listener
+// Add this to track the current song ID
+// let currentlyPlayingSongId = null;
+
+// Update your playSong event listener to store the current song ID
 window.addEventListener('playSong', function(event) {
     const songData = event.detail;
+    currentlyPlayingSongId = songData.song_id; // Make sure your song data includes the ID
     // console.log('Song Data:', songData); // Debug log to check the data
 
     // Update both cover images (blur background and main image)
@@ -176,15 +210,27 @@ window.addEventListener('playSong', function(event) {
         // Add play/pause click handler
         playButton.addEventListener('click', () => {
             if (audioElement.paused) {
-                audioElement.play();
+                audioElement.play().then(() => {
+                    dispatchSongStateEvent(true);
+                }).catch(error => {
+                    console.error('Error playing audio:', error);
+                });
             } else {
                 audioElement.pause();
+                dispatchSongStateEvent(false);
             }
         });
 
-        // Update button state when play/pause state changes
-        audioElement.addEventListener('play', updatePlayButtonIcon);
-        audioElement.addEventListener('pause', updatePlayButtonIcon);
+        // Update these event listeners to dispatch state changes
+        audioElement.addEventListener('play', () => {
+            updatePlayButtonIcon();
+            dispatchSongStateEvent(true);
+        });
+
+        audioElement.addEventListener('pause', () => {
+            updatePlayButtonIcon();
+            dispatchSongStateEvent(false);
+        });
         
         // Initial button state
         updatePlayButtonIcon();

@@ -26,3 +26,4 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::get('/app', [SongGeneratorController::class, 'index'])->name('app');
+Route::get('/music-generator', [MusicController::class, 'index'])->name('music-generator');

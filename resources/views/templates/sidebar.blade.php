@@ -12,8 +12,8 @@
                   </span>
                 </span>
               </a>
-              <!-- <div class="w-full mt-6 text-sm text-neutral-50 flex flex-col items-start">
-                <a class="w-full py-2 px-4 border-l-4 flex items-center gap-2 border-[#d946ef] bg-white/15 text-[#d946ef]" href="/app">
+              <div class="w-full mt-6 text-sm text-neutral-50 flex flex-col items-start">
+                <a class="w-full py-2 px-4 border-l-4 flex items-center gap-2 border-[#d946ef] bg-white/15 text-[#d946ef]" href="{{ route('music-generator') }}">
                   <span class="w-8 h-8 rounded-xl bg-[#d946ef] inline-flex items-center justify-center">
                     <span>
                       <svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-6 fill-neutral-800" preserveAspectRatio="none">
@@ -32,7 +32,7 @@
                     </span>
                   </span>
                 </a>
-                <a class="w-full py-2 px-4 border-l-4 flex items-center gap-2 border-transparent" href="/library">
+                <!-- <a class="w-full py-2 px-4 border-l-4 flex items-center gap-2 border-transparent" href="/library">
                   <span class="w-8 h-8 rounded-xl bg-white/70 inline-flex items-center justify-center">
                     <span>
                       <svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-6 fill-neutral-800" preserveAspectRatio="none">
@@ -63,8 +63,8 @@
                       </span>
                     </span>
                   </button>
-                </div>
-              </div> -->
+                </div> --> 
+              </div>
             </div>
           </div>
         </div>

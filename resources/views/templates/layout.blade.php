@@ -9,8 +9,46 @@
     <link rel="stylesheet" href="{{ asset('website-assets/css/style.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
   </head>
-  <style></style>
+  <style>
+    /* Add preloader styles */
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    
+    .preloader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s ease;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #d946ef;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+  </style>
   <body>
+    <!-- Add preloader HTML -->
+    <div class="preloader">
+      <div class="loader"></div>
+    </div>
+
     <div id="__next">
       <main class="md:h-[100vh] lg:h-[100vh]">
        @include('templates.sidebar')
@@ -83,7 +121,7 @@
            @include('templates.prompt')
             <div class="w-full h-full lg:flex-1">
               <div class="w-full h-auto lg:h-full flex flex-col lg:flex-row items-start">
-                <div class="w-full lg:h-full relative overflow-hidden" style="z-index:1">
+                <div class="w-full lg:h-full relative overflow-hidden" style="z-index:1;">
                  @include('templates.song')
                 </div>
                @include('templates.right-sidebar')
@@ -115,5 +153,15 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('website-assets/js/main.js') }}"></script>
+    <script>
+      // Add preloader script
+      window.addEventListener('load', function() {
+        const preloader = document.querySelector('.preloader');
+        preloader.classList.add('fade-out');
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 500);
+      });
+    </script>
   </body>
 </html>
