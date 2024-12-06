@@ -162,7 +162,7 @@ body, html  {
     
     height:  8px;
     
-    background:  #d946ef;
+    background:  #0096FF;
     
     border-radius:  50px
 }
@@ -177,7 +177,7 @@ body, html  {
     
     top:  -5px;
     
-    background:  #d946ef;
+    background:  #0096FF;
     
     border-radius:  50px;
     
@@ -230,7 +230,7 @@ body, html  {
     
     top:  -2px;
     
-    background:  #d946ef;
+    background:  #0096FF;
     
     box-shadow:  none
 }
@@ -5083,7 +5083,7 @@ img, video  {
     
     --tw-border-opacity:  1;
     
-    border-color:  rgb(217 70 239/var(--tw-border-opacity))
+    border-color:  rgb( 0 150 255/var(--tw-border-opacity))
 }
 
 .border-fuchsia-100  {
@@ -5128,7 +5128,7 @@ img, video  {
     
     --tw-border-opacity:  1;
     
-    border-color:  rgb(217 70 239/var(--tw-border-opacity))
+    border-color:  rgb( 0 150 255/var(--tw-border-opacity))
 }
 
 .border-gray-100  {
@@ -5264,7 +5264,7 @@ img, video  {
     
     --tw-bg-opacity:  1;
     
-    background-color:  rgb(217 70 239/var(--tw-bg-opacity))
+    background-color:  rgb( 0 150 255/var(--tw-bg-opacity))
 }
 
 .bg-\[\#d946ef\]\/5  {
@@ -5366,7 +5366,7 @@ img, video  {
     
     --tw-bg-opacity:  1;
     
-    background-color:  rgb(217 70 239/var(--tw-bg-opacity))
+    background-color:  rgb( 0 150 255/var(--tw-bg-opacity))
 }
 
 .bg-fuchsia-500\/10  {
@@ -6658,7 +6658,7 @@ img, video  {
     
     --tw-text-opacity:  1;
     
-    color:  rgb(217 70 239/var(--tw-text-opacity))
+    color:  rgb( 0 150 255/var(--tw-text-opacity))
 }
 
 .text-\[\#fff\]  {
@@ -6727,7 +6727,7 @@ img, video  {
     
     --tw-text-opacity:  1;
     
-    color:  rgb(217 70 239/var(--tw-text-opacity))
+    color:  rgb( 0 150 255/var(--tw-text-opacity))
 }
 
 .text-fuchsia-600  {
@@ -7333,7 +7333,8 @@ img, video  {
     
     transition-timing-function:  cubic-bezier(.4, 0, .2, 1);
     
-    transition-duration:  .15s
+    transition-duration:  .15s;
+    background-color: #0096FF;
 }
 
 .duration-200  {
@@ -7602,7 +7603,7 @@ img, video  {
 }
 .hover\:border-fuchsia-500:hover {
     --tw-border-opacity: 1;
-    border-color: rgb(217 70 239/var(--tw-border-opacity));
+    border-color: rgb( 0 150 255/var(--tw-border-opacity));
 }
 .hover\:border-fuchsia-600:hover {
     --tw-border-opacity: 1;
@@ -7610,7 +7611,7 @@ img, video  {
 }
 .hover\:bg-\[\#d946ef\]:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(217 70 239/var(--tw-bg-opacity));
+    background-color: rgb( 0 150 255/var(--tw-bg-opacity));
 }
 .hover\:bg-\[\#d946ef\]\/5:hover {
     background-color: rgba(217, 70, 239, .05);
@@ -7631,7 +7632,7 @@ img, video  {
 }
 .hover\:bg-fuchsia-500:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(217 70 239/var(--tw-bg-opacity));
+    background-color: rgb( 0 150 255/var(--tw-bg-opacity));
 }
 .hover\:bg-fuchsia-500\/10:hover {
     background-color: rgba(217, 70, 239, .1);
@@ -7723,7 +7724,7 @@ img, video  {
     fill: #10b981;
 }
 .hover\:fill-fuchsia-500:hover {
-    fill: #d946ef;
+    fill: #0096FF;
 }
 .hover\:fill-neutral-300:hover {
     fill: #d4d4d4;
@@ -7739,11 +7740,11 @@ img, video  {
 }
 .hover\:\!text-fuchsia-500:hover {
     --tw-text-opacity: 1!important;
-    color: rgb(217 70 239/var(--tw-text-opacity))!important;
+    color: rgb( 0 150 255/var(--tw-text-opacity))!important;
 }
 .hover\:text-\[\#d946ef\]:hover {
     --tw-text-opacity: 1;
-    color: rgb(217 70 239/var(--tw-text-opacity));
+    color: rgb( 0 150 255/var(--tw-text-opacity));
 }
 .hover\:text-accent-foreground:hover {
     color: hsl(var(--accent-foreground));
@@ -7773,7 +7774,7 @@ img, video  {
 }
 .hover\:text-fuchsia-500:hover {
     --tw-text-opacity: 1;
-    color: rgb(217 70 239/var(--tw-text-opacity));
+    color: rgb( 0 150 255/var(--tw-text-opacity));
 }
 .hover\:text-fuchsia-600:hover {
     --tw-text-opacity: 1;
@@ -7876,7 +7877,7 @@ img, video  {
 }
 .focus\:ring-fuchsia-500:focus {
     --tw-ring-opacity: 1;
-    --tw-ring-color: rgb(217 70 239/var(--tw-ring-opacity));
+    --tw-ring-color: rgb( 0 150 255/var(--tw-ring-opacity));
 }
 .focus\:ring-sky-200:focus {
     --tw-ring-opacity: 1;
@@ -7941,13 +7942,13 @@ img, video  {
     animation: bounce 1s infinite;
 }
 .group:hover .group-hover\:fill-\[\#d946ef\] {
-    fill: #d946ef;
+    fill: #0096FF;
 }
 .group:hover .group-hover\:fill-emerald-500 {
     fill: #10b981;
 }
 .group:hover .group-hover\:fill-fuchsia-500 {
-    fill: #d946ef;
+    fill: #0096FF;
 }
 .group:hover .group-hover\:fill-fuchsia-600 {
     fill: #c026d3;
@@ -7975,7 +7976,7 @@ img, video  {
 }
 .group:hover .group-hover\:text-\[\#d946ef\], .group:hover .group-hover\:text-fuchsia-500 {
     --tw-text-opacity: 1;
-    color: rgb(217 70 239/var(--tw-text-opacity));
+    color: rgb( 0 150 255/var(--tw-text-opacity));
 }
 .group:hover .group-hover\:text-fuchsia-600 {
     --tw-text-opacity: 1;
@@ -9678,4 +9679,9 @@ to {
 
 .rhap_button-clear:focus:not(:focus-visible) {
     outline: 0
+}
+
+.fill-\[\#0096FF\]  {
+    
+    fill:  #0096FF
 }

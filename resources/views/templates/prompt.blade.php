@@ -216,6 +216,7 @@
     background-color: white;
     border-radius: 50%;
     transition: transform 0.3s ease;
+    background-color: #0096FF;
   }
 
   .toggle-on .toggle-knob {

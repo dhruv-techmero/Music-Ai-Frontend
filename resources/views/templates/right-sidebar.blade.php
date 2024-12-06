@@ -63,7 +63,7 @@ function loadSongs(searchQuery = '') {
                 });
 
                 songList.append(`
-                    <div class="relative w-full p-2 border-b border-zinc-800 last:border-none transition duration-500 group hover:bg-zinc-800/50 cursor-pointer flex items-center justify-between gap-2 ${isPlaying ? 'bg-zinc-800/50' : ''}" 
+                    <div class="relative w-full p-2  border-zinc-800 last:border-none transition duration-500 group hover:bg-zinc-800/50 cursor-pointer flex items-center justify-between gap-2 ${isPlaying ? 'bg-zinc-800/50' : ''}" 
                          data-song-id="${song.song_id}">
                         <div class="w-16 h-16 rounded-md relative transition duration-500 group cursor-pointer overflow-hidden song-trigger">
                             <div class="w-full h-full rounded-md relative">
@@ -147,7 +147,7 @@ $(document).ready(function() {
                         });
                         // console.log(song.song_id)
                         songList.append(`
-                            <div class="relative w-full p-2 border-b border-zinc-800 last:border-none transition duration-500 group hover:bg-zinc-800/50 cursor-pointer flex items-center justify-between gap-2 ${isPlaying ? 'bg-zinc-800/50' : ''}" 
+                            <div class="relative w-full p-2  border-zinc-800 last:border-none transition duration-500 group hover:bg-zinc-800/50 cursor-pointer flex items-center justify-between gap-2 ${isPlaying ? 'bg-zinc-800/50' : ''}" 
                                  data-song-id="${song.song_id}">
                                 <div class="w-16 h-16 rounded-md relative transition duration-500 group cursor-pointer overflow-hidden song-trigger">
                                     <div class="w-full h-full rounded-md relative">
