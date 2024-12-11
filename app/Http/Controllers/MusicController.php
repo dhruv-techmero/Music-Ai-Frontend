@@ -7,109 +7,96 @@ use App\Models\Music;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-
+use Exception;
 class MusicController extends Controller
-{
-    private function refreshAndGetToken()
+{   public function __construct()
     {
-        $response = Http::post('https://aisuno.chataiappgpt.workers.dev/token');
-        $token = $response->json()['access_token'];
-        session(['access_token' => $token]);
-        return $token;
+        // Add CORS headers to all methods in this controller
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, x-csrf-token');
+        header('Access-Control-Allow-Credentials: true');
+
     }
-    public function lyricalMode(Request $request)
+    public function getToken()
     {
         try {
-            // Validate webhook URL if provided
-
-
-            $token = $this->refreshAndGetToken();
-            // return $token;
-
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token
-            ])->post('https://aisuno.chataiappgpt.workers.dev/ex/music_api/generate', [
-                'mv' => 'chirp-v3-5',
-                'prompt' => $request->input('prompt'),
-                'tags' => $request->input('tags'),
-                'title' => $request->input('title'),
-                'make_instrumental' => $request->input('make_instrumental', false),
+            $response = Http::get('https://suno-v2.chataiappgpt.workers.dev/token', [
+                'au' => null
             ]);
-            Log::info('API Response:', ['response' => $response->body()]);
 
-            // return $response->json();
-            $songId = $response->json()['clips'][0]['id'];
-            $accountId = $response->json()['account_id'];
+            if (!$response->successful()) {
+                throw new Exception('Failed to get token');
+            }
 
-            // Dispatch job to handle feed fetching and database storage
-            ProcessMusicFeed::dispatch($songId, $accountId);
-        } catch (\Exception $e) {
+            return response()->json($response->json());
+            
+        } catch (Exception $e) {
             return response()->json([
-                'error' => 'Failed to generate music',
+                'error' => 'Failed to get token',
                 'message' => $e->getMessage()
             ], 500);
         }
     }
 
-    public function singlePromptMode(Request $request)
+    public function lyricalMode(Request $request)
     {
         try {
-            // Validate request
-            // $validated = $request->validate([
-            //     'gpt_description_prompt' => 'required|string'
-            // ]);
-            // return response()->json($request->all());
-            $token = $this->refreshAndGetToken();
+            // Get token using the existing getToken method
+            $tokenResponse = $this->getToken();
+            $tokenData = json_decode($tokenResponse->getContent());
+            $token = $tokenData->jwt ?? null;
 
-            // Prepare request data matching lyricalMode format
-            // $requestData = [
-            //     'mv' => 'chirp-v3-5',
-            //     'prompt' => $validated['gpt_description_prompt'],
-            //     'make_instrumental' => false
-            // ];
-
-            // Log the request
-            // Log::info('API Request Details:', [
-            //     'raw_input' => $request->all(),
-            //     'validated_data' => $validated,
-            //     'final_request_data' => $requestData,
-            // ]);
-            
-            // Make API call with authorization header
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json'
-            ])->post('https://aisuno.chataiappgpt.workers.dev/ex/music_api/generate/description-mode', [
-                'gpt_description_prompt' => 'test',
-                'instrumental' => false,
-                'model' => 'chirp-v3-5',
-                'voice' => 'vocal female'
-            ]);
-            
-            // Detailed response logging
-            // Log::info('API Response Details:', [
-            //     'status' => $response->status(),
-            //     'headers' => $response->headers(),
-            //     'body' => $response->body(),
-            //     'request_data' => $requestData
-            // ]);
-            
-            if (!$response->successful()) {
-                throw new \Exception('API request failed: ' . $response->body());
+            if (!$token) {
+                throw new Exception('Failed to get valid token');
             }
 
-            $songId = $response->json()['clips'][0]['id'];
-            $accountId = $response->json()['account_id'];
+            // Then make the main request with the token
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json; charset=utf-8',
+                'Accept' => 'application/json',
+                'Upload-Draft-Interop-Version' => '6',
+                'Accept-Language' => 'en-US,en;q=0.9',
+                'Accept-Encoding' => 'gzip, deflate',
+                'X-Suno-Region' => 'US',
+                'User-Agent' => 'suno/1 CFNetwork/1568.300.101 Darwin/24.2.0',
+                'Upload-Complete' => '?1',
+                'X-Suno-Client' => 'iOS 1.0.42-1',
+                'Authorization' => 'Bearer ' . $token
+            ])
+            ->withBody(json_encode([
+                'generation_type' => 'TEXT',
+                'gpt_description_prompt' => $request->input('gpt_description_prompt', 'This is a some random song'),
+                'make_instrumental' => false,
+                'mv' => 'chirp-v3-5',
+                'prompt' => $request->input('prompt', ''),
+                'tags' => $request->input('tags', ''),
+                'title' => $request->input('title', 'Using subscribed account'),
+                'token' => null
+            ]), 'application/json')
+            ->post('https://suno-v2.chataiappgpt.workers.dev/generate');
 
-            // Dispatch job to handle feed fetching and database storage
-            ProcessMusicFeed::dispatch($songId, $accountId);
-            
+            if (!$response->successful()) {
+                throw new Exception('API request failed: ' . $response->body());
+            }
+
+            $responseData = $response->json();
+            $songId = $responseData['clips'][0]['id'] ?? null;
+            $accountId = $responseData['clips'][0]['user_id'] ?? null;
+            // return response()->json($songId);
+            if (!$songId || !$accountId) {
+                throw new Exception('Invalid response format from API');
+            }
+
+            // return response()->json($responseData);
+            ProcessMusicFeed::dispatch($songId, $accountId,$token);
+
             return response()->json([
-                'success' => true,
-                'data' => $response->json()
+                'message' => 'Music generation started',
+                'song_id' => $songId,
+                'account_id' => $accountId
             ]);
-            
+
         } catch (\Exception $e) {
             Log::error('Music generation failed:', [
                 'error' => $e->getMessage(),
@@ -117,57 +104,50 @@ class MusicController extends Controller
             ]);
             
             return response()->json([
-                'success' => false,
-                'message' => 'Failed to generate music',
-                'error' => $e->getMessage()
-            ], 500);
-        }
-    }
-
-
-    public function fetchFeed($songId = null, $accountId = null)
-    {
-
-        try {
-            $token = $this->refreshAndGetToken();
-
-            $feedId = $songId ?? 'd02c5618-8b34-43f3-8bc6-6cf6437e2fe7,9d954179-be1d-4dbe-97fd-22a9f7a99446';
-            $idx = $accountId ?? 16;
-
-            Log::info('Fetching feed with:', ['feedId' => $feedId, 'idx' => $idx]);
-
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token
-            ])->get("https://aisuno.chataiappgpt.workers.dev/ex/music_api/v2/feed/{$feedId}", [
-                'idx' => $idx
-            ]);
-
-
-            if ($response->successful()) {
-                return response()->json($response->json());
-            } else {
-                Log::error('Feed API error:', [
-                    'status' => $response->status(),
-                    'body' => $response->body()
-                ]);
-                return response()->json([
-                    'error' => 'Feed API returned an error',
-                    'status' => $response->status()
-                ], $response->status());
-            }
-        } catch (\Exception $e) {
-            Log::error('Exception in fetchFeed:', [
-                'message' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
-            ]);
-
-            return response()->json([
-                'error' => 'Failed to fetch feed data',
+                'error' => 'Failed to generate music',
                 'message' => $e->getMessage()
             ], 500);
         }
     }
 
+    public function singleFeed(Request $request)
+    {
+        try {
+            // Get token using the existing getToken method
+            $tokenResponse = $this->getToken();
+            $tokenData = json_decode($tokenResponse->getContent());
+            $token = $tokenData->jwt ?? null;
+
+            if (!$token) {
+                throw new Exception('Failed to get valid token');
+            }
+
+            $response = Http::withHeaders([
+                'Accept-Encoding' => 'gzip, deflate',
+                'Authorization' => 'Bearer ' . $token
+            ])
+            ->get('https://suno-v2.chataiappgpt.workers.dev/feed', [
+                'ids' => $request->input('id')
+            ]);
+
+            if (!$response->successful()) {
+                throw new Exception('Failed to fetch feed');
+            }
+
+            return response()->json($response->json());
+
+        } catch (Exception $e) {
+            Log::error('Feed fetch failed:', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            return response()->json([
+                'error' => 'Failed to fetch feed',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
 
     public function song(Request $request)
     {
@@ -182,6 +162,30 @@ class MusicController extends Controller
             return response()->json(['data' => $music, 'status' => 'success']);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'status' => 'error'], 500);
+        }
+    }
+
+    public function songList(){
+        try {
+            // Retrieve all records from the Music model
+            $records = Music::latest()->get();
+    
+            // Return success response with a proper structure
+            return response()->json([
+                'success' => true,
+                'message' => 'Music records retrieved successfully.',
+                'data' => $records
+            ], 200);
+        } catch (Exception $e) {
+            // Log the exception for debugging
+            Log::error('Error retrieving music records:', ['error' => $e->getMessage()]);
+    
+            // Return error response
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve music records.',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 }

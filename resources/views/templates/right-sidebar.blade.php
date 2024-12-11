@@ -23,7 +23,7 @@ let currentlyPlayingSongId = null; // Track current song globally
 
 function loadSongs(searchQuery = '') {
     $.ajax({
-        url: 'http://127.0.0.1:8081/api/song/list',
+        url: 'http://127.0.0.1:8000/song/list',
         method: 'GET',
         data: { search: searchQuery },
         headers: {

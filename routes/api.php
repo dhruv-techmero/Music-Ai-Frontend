@@ -24,9 +24,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::group(['prefix' => 'song'], function () {
-    Route::controller(MusicController::class)->group(function () {
-        Route::get('/feed', 'fetchFeed');
-        Route::post('/web-prompt-mode', 'singlePromptMode');
-    });
-});

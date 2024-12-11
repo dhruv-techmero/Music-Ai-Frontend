@@ -106,22 +106,23 @@
 </div>
 <script>
   document.getElementById('generate-music-btn').addEventListener('click', function() {
-    // console.log('Current URL:', window.location.href);
-    // console.log('Current Port:', window.location.port);
+    const button = this;
+    // Show loader
+    button.innerHTML = '<span class="loader"></span>'; // Add loader HTML
+    button.disabled = true; // Disable button to prevent multiple clicks
+
     const description = document.querySelector('textarea[placeholder*="Describe the style"]').value;
     const isCustomMode = document.getElementById('custom-mode').getAttribute('aria-checked') === 'true';
-    // alert(description);
+    
     if (!isCustomMode) {
-      // Get CSRF token from meta tag
       const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-      fetch('http://127.0.0.1:8000/api/song/web-prompt-mode', {
+      fetch('http://127.0.0.1:8000/song/web-prompt-mode', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'X-CSRF-TOKEN': token
         },
-        // credentials: 'include',  // This allows cookies to be sent
         body: JSON.stringify({
           gpt_description_prompt: description,
           make_instrumental: false,
@@ -134,9 +135,19 @@
         }
         return response.json();
       }).then(data => {
-        // console.log(data);
+        loadSongs(); // Assuming loadSongs is defined elsewhere
+        const event = new CustomEvent('playSong', { 
+                            detail: data 
+                        });
+                        window.dispatchEvent(event);
+        // Use the song_id from the response
       }).catch(error => {
         console.error('Error:', error);
+      }).finally(() => {
+        // Remove loader and reset button
+        button.innerHTML = 'Generate Music'; // Reset button text
+        button.disabled = false; // Re-enable button
+        document.querySelector('textarea[placeholder*="Describe the style"]').value = ''; // Clear input
       });
     }
   });
@@ -227,5 +238,19 @@
   .toggle-switch:focus {
     outline: 2px solid #4f46e5;
     outline-offset: 2px;
+  }
+
+  .loader {
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 </style>

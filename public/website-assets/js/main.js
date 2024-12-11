@@ -7,37 +7,37 @@ $(document).ready(function() {
         const description = $('textarea[placeholder*="Describe the style"]').val();
         const isCustomMode = $('#custom-mode').attr('aria-checked') === 'true';
 
-        if (!isCustomMode) {
-            // Get CSRF token from meta tag
-            const token = $('meta[name="csrf-token"]').attr('content');
+        // if (!isCustomMode) {
+        //     // Get CSRF token from meta tag
+        //     const token = $('meta[name="csrf-token"]').attr('content');
 
-            fetch('http://127.0.0.1:8000/api/song/web-prompt-mode', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': token
-                },
-                body: JSON.stringify({
-                    gpt_description_prompt: description,
-                    make_instrumental: false,
-                    mv: 'chirp-v3-5',
-                    prompt: 'vocal female'
-                })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
+        //     fetch('http://127.0.0.1:8001/api/song/generate', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'Accept': 'application/json',
+        //             'X-CSRF-TOKEN': token
+        //         },
+        //         body: JSON.stringify({
+        //             gpt_description_prompt: description,
+        //             make_instrumental: false,
+        //             mv: 'chirp-v3-5',
+        //             prompt: 'vocal female'
+        //         })
+        //     })
+        //     .then(response => {
+        //         if (!response.ok) {
+        //             throw new Error(`HTTP error! status: ${response.status}`);
+        //         }
+        //         return response.json();
+        //     })
+        //     .then(data => {
+        //         console.log(data);
+        //     })
+        //     .catch(error => {
+        //         console.error('Error:', error);
+        //     });
+        // }
     });
 
     // Custom Mode Toggle with animation

@@ -152,7 +152,9 @@ document.getElementById('songContainer').innerHTML = songTemplate;
 
 // Update your playSong event listener to store the current song ID
 window.addEventListener('playSong', function(event) {
+  // alert('call')
     const songData = event.detail;
+    console.log(songData)
     currentlyPlayingSongId = songData.song_id; // Make sure your song data includes the ID
     // console.log('Song Data:', songData); // Debug log to check the data
 

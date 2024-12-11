@@ -50,20 +50,20 @@
                       </svg>
                     </span>
                   </span>
-                </a>
-                <div class="w-full">
+                </a> -->
+               <a href="{{ route('logout') }}">
+               <div class="w-full">
                   <button class="w-full py-2 px-4 border-l-4 border-transparent text-left hover:bg-white/15 transition duration-500 flex items-center gap-2" fdprocessedid="6hxhj8">
                     <span class="w-8 h-8 rounded-xl inline-flex items-center justify-center">
                       <span>
-                        <svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-6 fill-neutral-300" preserveAspectRatio="none">
-                          <path fill="evenodd" clip-rule="evenodd" d="M512 80c238.587 0 432 193.413 432 432S750.587 944 512 944c-102.428 0-199.432-35.805-276.496-100.062-13.573-11.318-15.402-31.497-4.084-45.07 11.318-13.574 31.496-15.403 45.07-4.085C342.154 849.535 424.69 880 512 880c203.24 0 368-164.76 368-368S715.24 144 512 144c-87.31 0-169.846 30.465-235.51 85.217-13.574 11.318-33.752 9.489-45.07-4.085-11.318-13.573-9.49-33.752 4.084-45.07C312.568 115.805 409.572 80 512 80z"></path>
-                          <path fill="evenodd" clip-rule="evenodd" d="M728.333 489.373c12.372 12.371 12.496 32.353 0.371 44.877l-0.371 0.377-169.706 169.706c-12.496 12.497-32.758 12.497-45.254 0-12.372-12.372-12.496-32.354-0.372-44.878l0.372-0.377L660.45 512 513.373 364.922C501 352.55 500.877 332.568 513 320.044l0.372-0.377c12.371-12.372 32.353-12.496 44.877-0.371l0.377 0.371 169.706 169.706z"></path>
-                          <path fill="evenodd" clip-rule="evenodd" d="M96 480h566c17.673 0 32 14.327 32 32 0 17.673-14.327 32-32 32H96c-17.673 0-32-14.327-32-32 0-17.673 14.327-32 32-32z"></path>
+                        <svg aria-hidden="true" viewBox="0 0 24 24" class="w-6 fill-neutral-300">
+                          <path d="M16 17v-3H9v-4h7V7l5 5-5 5M14 2a2 2 0 012 2v2h-2V4H5v16h9v-2h2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2 0 012-2h9z"/>
                         </svg>
                       </span>
                     </span>
                   </button>
-                </div> --> 
+                </div> 
+               </a>
               </div>
             </div>
           </div>
