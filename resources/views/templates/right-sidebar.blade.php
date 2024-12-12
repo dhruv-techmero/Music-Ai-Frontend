@@ -23,7 +23,7 @@ let currentlyPlayingSongId = null; // Track current song globally
 
 function loadSongs(searchQuery = '') {
     $.ajax({
-        url: 'http://127.0.0.1:8000/song/list',
+        url: 'http://localhost:8000/website/song/list',
         method: 'GET',
         data: { search: searchQuery },
         headers: {
@@ -39,7 +39,7 @@ function loadSongs(searchQuery = '') {
                 
                 // Fetch and play the first song
                 $.ajax({
-                    url: `http://127.0.0.1:8081/api/song/?song_id=${firstSong.song_id}`,
+                    url: `http://127.0.0.1:8000/website/song/?song_id=${firstSong.song_id}`,
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
@@ -126,7 +126,7 @@ $(document).ready(function() {
         
         // Make AJAX call for search suggestions
         $.ajax({
-            url: 'http://127.0.0.1:8081/api/song/search',
+            url: 'http://localhost:8000/website/song/search',
             method: 'GET',
             data: { title: query },
             headers: {
@@ -230,7 +230,7 @@ $(document).ready(function() {
         updateSongUI(songId, true);
         
         $.ajax({
-            url: `http://127.0.0.1:8081/api/song/?song_id=${songId}`,
+            url: `http://localhost:8000/website/song/?song_id=${songId}`,
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

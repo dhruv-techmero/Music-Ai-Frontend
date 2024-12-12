@@ -116,7 +116,7 @@
     
     if (!isCustomMode) {
       const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-      fetch('http://127.0.0.1:8000/song/web-prompt-mode', {
+      fetch('http://localhost:8000/website/song/web-prompt-mode', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -137,9 +137,9 @@
       }).then(data => {
         loadSongs(); // Assuming loadSongs is defined elsewhere
         const event = new CustomEvent('playSong', { 
-                            detail: data 
-                        });
-                        window.dispatchEvent(event);
+                          detail: data.data 
+                      });
+                      window.dispatchEvent(event);
         // Use the song_id from the response
       }).catch(error => {
         console.error('Error:', error);

@@ -154,10 +154,10 @@ document.getElementById('songContainer').innerHTML = songTemplate;
 window.addEventListener('playSong', function(event) {
   // alert('call')
     const songData = event.detail;
-    console.log(songData)
+    // console.log(songData)
     currentlyPlayingSongId = songData.song_id; // Make sure your song data includes the ID
     // console.log('Song Data:', songData); // Debug log to check the data
-
+// console.log(currentlyPlayingSongId);
     // Update both cover images (blur background and main image)
     const coverImages = document.querySelectorAll('#songContainer img[alt="cover"]');
     coverImages.forEach(img => {

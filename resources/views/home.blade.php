@@ -11,7 +11,7 @@
                 <div class="w-full mt-6 flex items-center justify-center">
                   <a class="px-6 py-3 tracking-wide rounded-full uppercase text-zinc-800 text-lg border border-fuchsia-300/10 bg-fuchsia-400 backdrop-blur-md shadow-xl shadow-fuchsia-500/10 font-semibold overflow-hidden flex items-center gap-2 relative z-0 transition duration-500
                                 before:absolute before:inset-0 before:-z-10 before:translate-x-[150%] before:translate-y-[150%] before:scale-[2.5] before:rounded-[100%] before:bg-fuchsia-300 before:transition-transform before:duration-1000 before:content-[&quot;&quot;]
-                                hover:scale-105 hover:text-neutral-900 hover:before:translate-x-[0%] hover:before:translate-y-[0%] active:scale-95" href="{{ route('song-generator') }}">Create Your Song Now</a>
+                                hover:scale-105 hover:text-neutral-900 hover:before:translate-x-[0%] hover:before:translate-y-[0%] active:scale-95" href="{{ route('song-generate-view') }}">Create Your Song Now</a>
                 </div>
               </div>
             </div>

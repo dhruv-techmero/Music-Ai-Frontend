@@ -43,6 +43,7 @@
       100% { transform: rotate(360deg); }
     }
   </style>
+  
   <body>
     <!-- Add preloader HTML -->
     <div class="preloader">
@@ -150,6 +151,8 @@
       </main>
       <div class="Toastify"></div>
      @include('templates.dialog')
+ 
+
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('website-assets/js/main.js') }}"></script>
@@ -162,6 +165,7 @@
           preloader.style.display = 'none';
         }, 500);
       });
+     
     </script>
   </body>
 </html>

@@ -8,7 +8,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Http\Controllers\MusicController;
+use App\Http\Controllers\Website\SongController;
+use App\Models\Song;
 
 class ProcessMusicFeed implements ShouldQueue
 {
@@ -24,7 +25,7 @@ class ProcessMusicFeed implements ShouldQueue
         $this->token = $token;
     }
 
-    public function handle(MusicController $MusicController)
+    public function handle(SongController $SongController)
     {
         $maxAttempts = 3;
         $attempt = 1;
@@ -52,7 +53,7 @@ class ProcessMusicFeed implements ShouldQueue
                     'parameters' => $request->all()
                 ]);
                 
-                $response = $MusicController->singleFeed($request);
+                $response = $SongController->singleFeed($request);
                 $data = json_decode($response->getContent(), true);
                 
                 if (isset($data['error'])) {
@@ -62,8 +63,9 @@ class ProcessMusicFeed implements ShouldQueue
                 
                 // Check for actual MP3 URL before inserting into the database
                 if (!empty($data['clips'][0]['audio_url'])) {
-                    Music::create([
+                   Song::create([
                         'song_id' => $this->songId,
+                        'user_id' => auth()->user()->id,
                         'account_id' => (int)$this->accountId,
                         'title' => $data['clips'][0]['title'] ?? null,
                         'metadata' => json_encode($data['clips'][0] ?? []),

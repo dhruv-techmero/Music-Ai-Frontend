@@ -1,22 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Website;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
-class SongGeneratorController extends Controller
+class HomeController extends Controller
 {
-    // public function index()
-    // {
-    //     // if(session()->has('auth_token')){   
-    //         return view('templates.layout');
-    //     // }
-    //     return redirect()->route('home');
-    // }
-
-    // public function home()
-    // {
+    public function index()
+    {
         $songs = [
             'data' => [
                 ['id' => 1, 'title' => 'Song 1', 'artist' => 'Artist 1','audio_url'=> '123','image_url' => '12',],
@@ -25,5 +17,5 @@ class SongGeneratorController extends Controller
             ],
         ];
         return view('home', compact('songs'));
-    // }
-} 
+    }
+}

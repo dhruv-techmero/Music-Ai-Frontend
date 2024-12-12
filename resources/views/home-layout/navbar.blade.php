@@ -152,7 +152,7 @@ function handleGoogleLogin() {
     sessionStorage.setItem('redirectUrl', window.location.href);
     
     // Redirect to Google OAuth endpoint
-    window.location.href = 'http://localhost:8081/api/google';
+    window.location.href = 'http://localhost:8000/google';
 }
 
 // Check for auth token on page load
