@@ -142,7 +142,7 @@ $(document).ready(function() {
                         const isPlaying = currentlyPlayingSongId === song.song_id;
                         let created_at = new Date(song.created_at).toLocaleDateString('en-US', { 
                             year: 'numeric', 
-                            month: 'long', 
+                              month: 'long', 
                             day: 'numeric' 
                         });
                         // console.log(song.song_id)

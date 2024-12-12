@@ -1,4 +1,4 @@
-<footer class="bg-slate-800 text-gray-100">
+<!-- <footer class="bg-slate-800 text-gray-100">
         <div class="mx-auto w-full max-w-7xl px-5 pt-16 pb-6 md:px-10 relative">
           <div class="grid grid-cols-[auto_auto] justify-between gap-8 sm:grid-cols-[auto_auto_auto] lg:grid-cols-[auto_auto_auto_auto_auto]">
             <div class="flex flex-col items-start font-semibold">
@@ -58,4 +58,4 @@
             </div>
           </div>
         </div>
-      </footer>
+      </footer> -->

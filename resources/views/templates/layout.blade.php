@@ -161,9 +161,11 @@
       window.addEventListener('load', function() {
         const preloader = document.querySelector('.preloader');
         preloader.classList.add('fade-out');
+        
+        // Use a shorter timeout and ensure the preloader is hidden
         setTimeout(() => {
           preloader.style.display = 'none';
-        }, 500);
+        }, 500); // 500 milliseconds (0.5 seconds)
       });
      
     </script>

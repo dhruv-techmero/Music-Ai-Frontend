@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Jobs\ProcessMusicFeed;
+use App\Models\ActivityLog;
 use App\Models\Song;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Exception;
+use Illuminate\Notifications\Action;
+
 class SongController extends Controller
 {
     public function __construct()
@@ -40,6 +43,13 @@ class SongController extends Controller
             return response()->json($response->json());
             
         } catch (Exception $e) {
+
+            ActivityLog::create([
+                'api_url' => 'https://suno-v2.chataiappgpt.workers.dev/token',
+                'error' => $e->getMessage(),
+                'user_id' => auth()->user()->id
+            ]);
+
             return response()->json([
                 'error' => 'Failed to get token',
                 'message' => $e->getMessage()
@@ -107,10 +117,16 @@ class SongController extends Controller
             ]);
 
         } catch (\Exception $e) {
-            Log::error('Music generation failed:', [
+
+            ActivityLog::create([
+                'api_url' => 'https://suno-v2.chataiappgpt.workers.dev/generate',
                 'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
+                'user_id' => auth()->user()->id
             ]);
+            // Log::error('Music generation failed:', [
+            //     'error' => $e->getMessage(),
+            //     'trace' => $e->getTraceAsString()
+            // ]);
             
             return response()->json([
                 'error' => 'Failed to generate music',
@@ -177,7 +193,7 @@ class SongController extends Controller
     public function songList(){
         try {
             // Retrieve all records from the Music model
-            $records = Song::latest()->get();
+            $records = Song:: where('user_id',auth()->user()->id)->latest()->get();
     
             // Return success response with a proper structure
             return response()->json([
@@ -203,7 +219,7 @@ class SongController extends Controller
       try{
 
         $title = $request->input('title');
-        $songs  = Song::where('title', 'like', '%' . $title . '%')->get();
+        $songs  = Song::where('title', 'like', '%' . $title . '%')->where('user_id',auth()->user()->id)->latest()->get();
         return response()->json(['data' => $songs, 'status' => 'success']);
       }catch(\Exception $e){
         return response()->json([

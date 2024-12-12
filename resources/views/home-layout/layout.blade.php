@@ -6,8 +6,8 @@
     <title>Document</title>
     
     <link rel="stylesheet" href="{{ asset('website-assets/css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('website-assets/css/embeded.css') }}">
-    <link rel="stylesheet" href="{{ asset('website-assets/css/style.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('website-assets/css/embeded.css') }}"> -->
+    <!-- <link rel="stylesheet" href="{{ asset('website-assets/css/style.css') }}"> -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body class="w-full h-full bg-[#0C121F] text-gray-100 !pointer-events-auto cursor-default">

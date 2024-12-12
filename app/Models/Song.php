@@ -58,7 +58,9 @@ class Song extends Model
         'large_image_downloaded' => 'boolean',
         'last_download_attempt' => 'datetime'
     ];
-
+    public function users(){
+        return $this->hasOne(User::class,'id','user_id');
+    }
     public function downloadFiles()
     {
         $this->last_download_attempt = now();

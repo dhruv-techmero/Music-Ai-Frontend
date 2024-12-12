@@ -154,6 +154,7 @@ document.getElementById('songContainer').innerHTML = songTemplate;
 window.addEventListener('playSong', function(event) {
   // alert('call')
     const songData = event.detail;
+    console.log
     // console.log(songData)
     currentlyPlayingSongId = songData.song_id; // Make sure your song data includes the ID
     // console.log('Song Data:', songData); // Debug log to check the data
@@ -162,13 +163,14 @@ window.addEventListener('playSong', function(event) {
     const coverImages = document.querySelectorAll('#songContainer img[alt="cover"]');
     coverImages.forEach(img => {
         if (songData.image_url) {
+          // alert('asdsa');
             img.src = songData.image_url;
             // Remove any error-related classes and ensure image is visible
             img.style.display = 'block';
             img.onerror = function() {
                 console.error('Failed to load image:', songData.image_url);
                 // Optionally set a fallback image
-                this.src = '/path/to/fallback-image.jpg';
+                this.src = 'website-assets/default/1.png';
             };
         }
     });

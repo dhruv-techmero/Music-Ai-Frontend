@@ -51,28 +51,5 @@ Route::get('logout',[AuthController::class,'logout'])->name('logout');
     });
 
 
-// Route::get('/logout', function(){
-//     session()->forget('auth_token');
-//     session()->save();
-//     return redirect()->route('home');
-// })->name('logout');
 
-// Public routes
-// Route::get('/', [SongGeneratorController::class, 'home'])->name('home');
-
-// Route::get('/auth/callback/', function(Request $request) {    
-//     $token = $request->query('token');
-//     session(['auth_token' => $token]);
-//     session()->save();
-//     return redirect('/song-generator');
-// })->name('auth.callback');
-
-// These routes were previously protected, now public
-// Route::get('/song-generator', [SongGeneratorController::class, 'index'])->name('song-generator');
-// Route::get('/music-generator', [MusicController::class, 'index'])->name('music-generator');
-
-
-// Route::group(['prefix' => 'auth'],function(){
- 
-// });
-
+// Route::get('')
