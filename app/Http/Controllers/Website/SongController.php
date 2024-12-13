@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Jobs\ProcessMusicFeed;
 use App\Models\ActivityLog;
 use App\Models\Song;
+use App\Models\SunoAccount;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Exception;
@@ -32,15 +33,30 @@ class SongController extends Controller
     public function getToken()
     {
         try {
-            $response = Http::get('https://suno-v2.chataiappgpt.workers.dev/token', [
-                'au' => null
-            ]);
+            $accounts = SunoAccount::all();
+            foreach ($accounts as $account) {
+        
+                $response = Http::withHeaders([
+                    'x-suno-authorization' => $account->authorization,
+                    'sessionId' => $account->session_id,
+                    'nativeDeviceId' => $account->device_id,
+                    'clerkClientId' => $account->client_id
+                ])->get('https://suno-v2.chataiappgpt.workers.dev/token');
 
-            if (!$response->successful()) {
-                throw new Exception('Failed to get token');
+                // Log the response for debugging
+            //  dd($response->json()['jwt']);
+
+                if ($response->successful()) {
+                    return response()->json([
+                        'token' => $response->json()['jwt'] ?? null,
+                        'account_id' => $account->id
+                    ]);
+                } else {
+                    // Update the status of the account to indicate failure
+                    $account->update(['status' => 2]); // Assuming 'status' is a field in your SunoAccount model
+                }
             }
-
-            return response()->json($response->json());
+            throw new Exception('Failed to get token from all accounts');
             
         } catch (Exception $e) {
 
@@ -63,8 +79,8 @@ class SongController extends Controller
             // Get token using the existing getToken method
             $tokenResponse = $this->getToken();
             $tokenData = json_decode($tokenResponse->getContent());
-            $token = $tokenData->jwt ?? null;
-
+            $token = $tokenData->token ?? null;
+// dd($token);
             if (!$token) {
                 throw new Exception('Failed to get valid token');
             }
@@ -93,14 +109,17 @@ class SongController extends Controller
                 'token' => null
             ]), 'application/json')
             ->post('https://suno-v2.chataiappgpt.workers.dev/generate');
-
+            Log::info('Token request response:', [
+                'response' => $response->json(),
+                'status' => $response->status()
+            ]);
             if (!$response->successful()) {
                 throw new Exception('API request failed: ' . $response->body());
             }
 
             $responseData = $response->json();
             $songId = $responseData['clips'][0]['id'] ?? null;
-            $accountId = $responseData['clips'][0]['user_id'] ?? null;
+            $accountId = $tokenData->account_id ?? null;
             // return response()->json($songId);
             if (!$songId || !$accountId) {
                 throw new Exception('Invalid response format from API');
@@ -141,7 +160,7 @@ class SongController extends Controller
             // Get token using the existing getToken method
             $tokenResponse = $this->getToken();
             $tokenData = json_decode($tokenResponse->getContent());
-            $token = $tokenData->jwt ?? null;
+            $token = $tokenData->token ?? null;
 
             if (!$token) {
                 throw new Exception('Failed to get valid token');

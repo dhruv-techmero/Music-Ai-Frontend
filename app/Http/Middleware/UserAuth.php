@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class UserAuth
 {
@@ -16,9 +17,14 @@ class UserAuth
      */
     public function handle(Request $request, Closure $next)
     {
-    //     if (!session()->has('auth_token')) {
-    //         return redirect()->route('home');
-    //     }
-        return $next($request);
+        if (!auth()->check()) { // Check if the user is not authenticated
+            $routeName = $request->route() ? $request->route()->getName() : null; // Get the current route name
+            if ($routeName && $routeName !== 'home') { // Check if the route exists and is not 'home'
+                return redirect()->route('home'); // Redirect to the 'home' route
+            }
+        } 
+    
+        return $next($request); // Proceed with the request
     }
+    
 }

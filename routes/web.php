@@ -6,6 +6,7 @@ use App\Http\Controllers\SongGeneratorController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\SongController;
+use App\Models\SunoAiSong;
 use Illuminate\Http\Request;
 
 /*
@@ -29,8 +30,8 @@ Route::get('/{provider}/callback', [AuthController::class, 'handleProviderCallba
 
 
 
-Route::group(['prefix' => 'website'],function(){
-Route::get('logout',[AuthController::class,'logout'])->name('logout');
+Route::group(['prefix' => 'website', 'middleware' => 'user_auth'], function() {
+    Route::get('logout',[AuthController::class,'logout'])->name('logout');
    
     Route::group(['prefix' => 'song'], function () {
         Route::controller(SongController::class)->group(function () {
@@ -52,4 +53,6 @@ Route::get('logout',[AuthController::class,'logout'])->name('logout');
 
 
 
-// Route::get('')
+Route::get('suno-songs', function() {
+    (new SunoAiSong())->download();
+})->name('suno.songs.download');

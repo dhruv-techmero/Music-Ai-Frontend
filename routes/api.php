@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\MusicController;
-use App\Http\Controllers\SongController;
+use App\Http\Controllers\Website\SongController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Route::get('/song/web-prompt-mode', [SongController::class, 'webPromptMode']);
-
+Route::get('token',[SongController::class,'getToken']);
 
 

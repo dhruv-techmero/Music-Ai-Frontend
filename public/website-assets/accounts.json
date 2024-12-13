@@ -1,0 +1,14 @@
+[
+    {
+        "session_id": "sess_2q0beym7gRUpawWO05A87ziF8ZL",
+        "authorization": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsaWVudF8yb1FWMVkxbjZuWGs5TzRHdFNWaGtTeVpPS3giLCJyb3RhdGluZ190b2tlbiI6InIwN3pxczMwd2NzOWZmNW5kZ2U1dWFmbWhmZGc3ZnYwbTh5a2ZzMXgifQ.a4NG9mY4jcwMeBn6U1qgFHMtIJmA0l2dgm581WOKy0KrxQVaCC76aRwAVR_YfLOjyBmUYeJ_2kJAJL1VOFfrCk802r0-px0Xg5ZArhRwWff3Wv3FqiZvK8l0bOjVIn0JVhMY978M5_pkKjwJq_Ay5q6ZzsB2Wxa9uGw2df3F86thtPeYjUX9UnnBm8gxPVVETacQ7FqUt9l6C47RUgJvHBYDAzRRfu4adUPu6Z4kUVZUCPk19UlZBtT-Vx0yTYK5Wzi3bo_3OE0SiA2DvbLPLIgtSv4iq4lD1YCwi4zSRBjhXkoyoD9Fh_YpRJQkQqTllgq3A0C5VwhrqQfOcNyH6g",
+        "device_id": "78E13C99-17AB-4BD9-9E77-C0C10744F87B",
+        "client_id": "client_2pmY9XkNyqVK4uIPmHa7hLJECu2"
+      }
+      ,{
+        "session_id": "sess_2q6ujXHFXHCKjmtgpenvvnZmhlS",
+        "authorization": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsaWVudF8ycTZ1aDlxZklQSWM5eWN6TjJJamZSbEhSUFYiLCJyb3RhdGluZ190b2tlbiI6InV4bjNjanZla296czk0emF2bGF6YjI1aGd0eW55cWwyZ3h3Zmk2cGQifQ.XFUvpT0xVNCRDXrKGsdsHalbJYwaYN1Zl_FwEu4RneXSwJa35pish1JHV59VC4XpCpGQtqLEgxxDIYl_x9MeCk7zFWHuhsc6gHg2ZBM0IHCkr6D0BfvuOPgsBi-kP1AqZB5g5yA9sqTWYE7CoqtRmX2OteEsqZrRYwPVgJY-5BE_NpLjpAHpi_JOqbzZs1wGbKV-Zzcf7Xvd0mtUAn0smFp9p01EMYBUZPllCBTd3qFl2goVZPswtn81uFB9xZB5WaNGkKR0jjnzCE3DFud-sQ7XcGgIZeKQvzHJheWYvxMxOqPvaWOFeJaOQsoLh8SKb40kYpebsafBFixSXMmUxg",
+        "device_id": "C690A9B7-9F1F-46CD-83AB-303C08C2BD8B",
+        "client_id": "client_2q6uh9qfIPIc9yczN2IjfRlHRPV"
+      }
+]
