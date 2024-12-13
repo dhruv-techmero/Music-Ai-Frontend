@@ -34,12 +34,13 @@ Route::group(['prefix' => 'website', 'middleware' => 'user_auth'], function() {
     Route::get('logout',[AuthController::class,'logout'])->name('logout');
    
     Route::group(['prefix' => 'song'], function () {
+        
+        Route::post('web-prompt-mode', [SongGeneratorController::class,'lyricalMode']);
+        Route::options('/web-prompt-mode', ['POST']);
         Route::controller(SongController::class)->group(function () {
             Route::get('/', 'song');
             Route::get('/search', 'search');
     
-            Route::post('/web-prompt-mode', 'lyricalMode');
-            Route::options('/web-prompt-mode', ['POST']);
     
             Route::get('/feed', 'singleFeed');
             Route::options('/feed', ['GET']);

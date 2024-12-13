@@ -162,7 +162,7 @@ class SongController extends Controller
 
                 // return response()->json($responseData);
               $insert_response =  ProcessMusicFeed::dispatch($songId, $accountId, $token);
-// dd($insert_response);
+
                 return response()->json([
                     "message" => "Music generation started",
                     "song_id" => $insert_response->id,
@@ -195,124 +195,6 @@ class SongController extends Controller
         }
     }
 
-    public function singleFeed(Request $request)
-    {
-        try {
-            // Get token using the existing getToken method
-            $tokenResponse = $this->getToken();
-            $tokenData = json_decode($tokenResponse->getContent());
-            $token = $tokenData->token ?? null;
-
-            if (!$token) {
-                throw new Exception("Failed to get valid token");
-            }
-
-            $response = Http::withHeaders([
-                "Accept-Encoding" => "gzip, deflate",
-                "Authorization" => "Bearer " . $token,
-            ])->get("https://suno-v2.chataiappgpt.workers.dev/feed", [
-                "ids" => $request->input("id"),
-            ]);
-
-            if (!$response->successful()) {
-                throw new Exception("Failed to fetch feed");
-            }
-
-            return response()->json($response->json());
-        } catch (Exception $e) {
-            Log::error("Feed fetch failed:", [
-                "error" => $e->getMessage(),
-                "trace" => $e->getTraceAsString(),
-            ]);
-
-            return response()->json(
-                [
-                    "error" => "Failed to fetch feed",
-                    "message" => $e->getMessage(),
-                ],
-                500
-            );
-        }
-    }
-
-    public function song(Request $request)
-    {
-        $songId = $request->input("song_id");
-        // $accountId = $request->input('account_id');
-        try {
-            $music = Song::where("song_id", $songId)
-                ->whereNotNull("audio_url")
-                ->first();
-
-            if (!$music) {
-                return response()->json(
-                    ["message" => "Music not found", "status" => "error"],
-                    404
-                );
-            }
-            return response()->json(["data" => $music, "status" => "success"]);
-        } catch (\Exception $e) {
-            return response()->json(
-                ["message" => $e->getMessage(), "status" => "error"],
-                500
-            );
-        }
-    }
-
-    public function songList()
-    {
-        try {
-            // Retrieve all records from the Music model
-            $records = Song::where("user_id", auth()->user()->id)
-                ->latest()
-                ->get();
-
-            // Return success response with a proper structure
-            return response()->json(
-                [
-                    "success" => true,
-                    "message" => "Music records retrieved successfully.",
-                    "data" => $records,
-                ],
-                200
-            );
-        } catch (Exception $e) {
-            // Log the exception for debugging
-            Log::error("Error retrieving music records:", [
-                "error" => $e->getMessage(),
-            ]);
-
-            // Return error response
-            return response()->json(
-                [
-                    "success" => false,
-                    "message" => "Failed to retrieve music records.",
-                    "error" => $e->getMessage(),
-                ],
-                500
-            );
-        }
-    }
-
-    public function search(Request $request)
-    {
-        try {
-            $title = $request->input("title");
-            $songs = Song::where("title", "like", "%" . $title . "%")
-                ->where("user_id", auth()->user()->id)
-                ->latest()
-                ->get();
-            return response()->json(["data" => $songs, "status" => "success"]);
-        } catch (\Exception $e) {
-            return response()->json(
-                [
-                    "error" => "Failed to search music data",
-                    "message" => $e->getMessage(),
-                ],
-                500
-            );
-        }
-    }
 
     public function generateSong($prompt)
     {
@@ -433,4 +315,126 @@ class SongController extends Controller
             );
         }
     }
+
+
+    public function singleFeed(Request $request)
+    {
+        try {
+            // Get token using the existing getToken method
+            $tokenResponse = $this->getToken();
+            $tokenData = json_decode($tokenResponse->getContent());
+            $token = $tokenData->token ?? null;
+
+            if (!$token) {
+                throw new Exception("Failed to get valid token");
+            }
+
+            $response = Http::withHeaders([
+                "Accept-Encoding" => "gzip, deflate",
+                "Authorization" => "Bearer " . $token,
+            ])->get("https://suno-v2.chataiappgpt.workers.dev/feed", [
+                "ids" => $request->input("id"),
+            ]);
+
+            if (!$response->successful()) {
+                throw new Exception("Failed to fetch feed");
+            }
+
+            return response()->json($response->json());
+        } catch (Exception $e) {
+            Log::error("Feed fetch failed:", [
+                "error" => $e->getMessage(),
+                "trace" => $e->getTraceAsString(),
+            ]);
+
+            return response()->json(
+                [
+                    "error" => "Failed to fetch feed",
+                    "message" => $e->getMessage(),
+                ],
+                500
+            );
+        }
+    }
+
+    public function song(Request $request)
+    {
+        $songId = $request->input("song_id");
+        // $accountId = $request->input('account_id');
+        try {
+            $music = Song::where("song_id", $songId)
+                ->whereNotNull("audio_url")
+                ->first();
+
+            if (!$music) {
+                return response()->json(
+                    ["message" => "Music not found", "status" => "error"],
+                    404
+                );
+            }
+            return response()->json(["data" => $music, "status" => "success"]);
+        } catch (\Exception $e) {
+            return response()->json(
+                ["message" => $e->getMessage(), "status" => "error"],
+                500
+            );
+        }
+    }
+
+    public function songList()
+    {
+        try {
+            // Retrieve all records from the Music model
+            $records = Song::where("user_id", auth()->user()->id)
+                ->latest()
+                ->get();
+
+            // Return success response with a proper structure
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Music records retrieved successfully.",
+                    "data" => $records,
+                ],
+                200
+            );
+        } catch (Exception $e) {
+            // Log the exception for debugging
+            Log::error("Error retrieving music records:", [
+                "error" => $e->getMessage(),
+            ]);
+
+            // Return error response
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Failed to retrieve music records.",
+                    "error" => $e->getMessage(),
+                ],
+                500
+            );
+        }
+    }
+
+    public function search(Request $request)
+    {
+        try {
+            $title = $request->input("title");
+            $songs = Song::where("title", "like", "%" . $title . "%")
+                ->where("user_id", auth()->user()->id)
+                ->latest()
+                ->get();
+            return response()->json(["data" => $songs, "status" => "success"]);
+        } catch (\Exception $e) {
+            return response()->json(
+                [
+                    "error" => "Failed to search music data",
+                    "message" => $e->getMessage(),
+                ],
+                500
+            );
+        }
+    }
+
+   
 }

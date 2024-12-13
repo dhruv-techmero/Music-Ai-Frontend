@@ -190,7 +190,7 @@ class Song extends Model
                                     'model_name' => $clip['model_name'] ?? $audio->model_name,
                                     'metadata' => $clip['metadata'] ?? $audio->metadata,
                                     'title' => $clip['title'] ?? $audio->title,
-                                    // 'lyrics' => $clip['metadata'] ['prompt'] ?? $audio->prompt,
+                                    'lyrics' => $clip['metadata'] ['prompt'] ?? $audio->prompt,
                                     'status' => $clip['status'] ?? $audio->status,
                                 ];
 

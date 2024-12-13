@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MusicController;
+use App\Http\Controllers\SongGeneratorController;
 use App\Http\Controllers\Website\SongController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('token',[SongController::class,'getToken']);
 
 
-Route::post('prompt-mode',[SongController::class,'lyricalMode']);
+Route::post('prompt-mode',[SongGeneratorController::class,'lyricalMode']);
 Route::options('prompt-mode', ['POST']);
 
 
