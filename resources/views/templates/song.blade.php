@@ -1,4 +1,4 @@
-<div id="songContainer"></div>
+<div id="songContainer" style="height: 600px;"></div>
 
 <script>
 // Add this new event listener near the top of your script
@@ -32,7 +32,7 @@ function dispatchSongStateEvent(isPlaying) {
 }
 
 const songTemplate = `
-  <div class="w-full h-[400px] lg:h-[90%] p-4 pb-32 lg:p-10 overflow-y-auto">
+  <div class="w-full  p-4 pb-32 lg:p-10 overflow-y-auto" style="height:600px">
     <div class="w-full">
       <img alt="cover" loading="lazy" width="100" height="100" decoding="async" data-nimg="1" class="w-full h-full object-cover blur-xl opacity-50 absolute top-0 left-0 z-[-1]" src="" style="color: transparent;" />
       <div class="w-1/2 lg:w-1/3 mx-auto">
