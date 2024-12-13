@@ -2,30 +2,38 @@
 
 namespace App\Jobs;
 
-use App\Models\Music;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Http\Controllers\Website\SongController;
-use App\Models\Song;
 
-class ProcessMusicFeed implements ShouldQueue
+class FallbackJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    /**
+     * Create a new job instance.
+     *
+     * @return void
+     */
     protected $songId;
-        protected $accountId;
-        protected $token;
-    public function __construct($songId, $accountId,$token)
-    {
-        $this->songId = $songId;
-        $this->accountId = $accountId;
-        $this->token = $token;
-    }
+    protected $accountId;
+    protected $token;
+public function __construct($songId, $accountId,$token)
+{
+    $this->songId = $songId;
+    $this->accountId = $accountId;
+    $this->token = $token;
+}
 
-    public function handle(SongController $SongController)
+    /**
+     * Execute the job.
+     *
+     * @return void
+     */
+    public function handle()
     {
         $maxAttempts = 3;
         $attempt = 1;
@@ -79,4 +87,4 @@ class ProcessMusicFeed implements ShouldQueue
             }
         }
     }
-} 
+}

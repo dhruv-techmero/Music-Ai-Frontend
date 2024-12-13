@@ -215,4 +215,24 @@ class Song extends Model
             }
         }
     }
+
+
+
+    public static function insertSong($data,$accountId){
+     $song =   self::create([
+            
+            'song_id' => $data['id'],
+            'user_id' => auth()->user()->id,
+            'account_id' => (int) $accountId,
+            'title' => $data['title'] ?? null,
+            'metadata' => json_encode($data['metadata'] ?? []),
+            'audio_url' => $data['audio_url'] ?? null,
+            'image_url' => $data['image_url'] ?? null,
+            'video_url' => $data['video_url'] ?? null,
+            'image_large_url' => $data['image_large_url'] ?? null,
+            
+        ]);
+
+        return $song;
+    }
 }
