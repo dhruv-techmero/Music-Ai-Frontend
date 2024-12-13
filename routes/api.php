@@ -24,3 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('token',[SongController::class,'getToken']);
 
 
+Route::post('prompt-mode',[SongController::class,'lyricalMode']);
+Route::options('prompt-mode', ['POST']);
+
+
+Route::get('/feed', [SongController::class, 'singleFeed']);
+Route::options('/feed', ['GET']);
+Route::get('list', [SongController::class, 'songList']);
+Route::get('generate-song', [SongController::class, 'songPage'])->name('song-generate-view');

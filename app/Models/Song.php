@@ -218,20 +218,24 @@ class Song extends Model
 
 
 
-    public static function insertSong($data,$accountId){
-     $song =   self::create([
-            
-            'song_id' => $data['id'],
-            'user_id' => auth()->user()->id,
-            'account_id' => (int) $accountId,
-            'title' => $data['title'] ?? null,
-            'metadata' => json_encode($data['metadata'] ?? []),
-            'audio_url' => $data['audio_url'] ?? null,
-            'image_url' => $data['image_url'] ?? null,
-            'video_url' => $data['video_url'] ?? null,
-            'image_large_url' => $data['image_large_url'] ?? null,
-            
-        ]);
+    public static function insertSong($data, $accountId) {
+        // Check if the user is authenticated
+        $user_id = auth()->check() ? auth()->user()->id : 1; // Set user_id to null if not authenticated
+
+        // Use updateOrCreate to avoid duplicate entry error
+        $song = self::updateOrCreate(
+            ['song_id' => $data['id']], // Condition to check for existing record
+            [
+                'user_id' => $user_id,
+                'account_id' => (int) $accountId,
+                'title' => $data['title'] ?? null,
+                'metadata' => json_encode($data['metadata'] ?? []),
+                'audio_url' => $data['audio_url'] ?? null,
+                'image_url' => $data['image_url'] ?? null,
+                'video_url' => $data['video_url'] ?? null,
+                'image_large_url' => $data['image_large_url'] ?? null,
+            ]
+        );
 
         return $song;
     }

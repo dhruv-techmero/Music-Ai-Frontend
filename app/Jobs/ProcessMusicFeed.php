@@ -55,9 +55,9 @@ class ProcessMusicFeed implements ShouldQueue
                 
                 // Check for actual MP3 URL before inserting into the database
                 if (!empty($data['clips'][0]['audio_url'])) {
-                   Song::create([
+                $song =   Song::create([
                         'song_id' => $this->songId,
-                        'user_id' => auth()->user()->id,
+                        'user_id' => auth()->user()->id ?? 1,
                         'account_id' => (int)$this->accountId,
                         'title' => $data['clips'][0]['title'] ?? null,
                         'metadata' => json_encode($data['clips'][0] ?? []),
@@ -66,7 +66,7 @@ class ProcessMusicFeed implements ShouldQueue
                         'video_url' => $data['clips'][0]['video_url'] ?? null,
                         'image_large_url' => $data['clips'][0]['image_large_url'] ?? null,
                     ]);
-                    return; // Exit if successful
+                    return $song; // Exit if successful
                 }
                 // If audio_url is not present, do not insert into the database
             } catch (\Exception $e) {

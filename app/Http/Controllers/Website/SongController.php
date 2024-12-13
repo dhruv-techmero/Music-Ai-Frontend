@@ -29,7 +29,7 @@ class SongController extends Controller
     {
         return view("templates.layout");
     }
-    
+
     public function getToken()
     {
         try {
@@ -122,8 +122,9 @@ class SongController extends Controller
                 "response" => $response->json(),
                 "status" => $response->status(),
             ]);
-
+            // dd($response->json());
             if (!$response->successful()) {
+               
                 // Attempt to generate a song
                 $prompt = $request->input(
                     "gpt_description_prompt",
@@ -134,22 +135,24 @@ class SongController extends Controller
 
                 // Decode the JSON response
                 $responseArray = json_decode($responseData, true);
+                // dd($responseArray);
 
                 // Get only the first record from the result
-                $singleRecord =
-                    $responseArray["result"]["public_song"]["result"][0];
+                $singleRecord =  $responseArray["result"]["public_song"]["result"][0];
                 $accountId = $tokenData->account_id ?? null;
+                // dd('asdad');
                 $create_response = Song::insertSong($singleRecord, $accountId);
-
+                // dd($create_response);
                 return response()->json([
                     "message" => "Music generation started",
                     "song_id" => $create_response->id,
                     "account_id" => $accountId,
-                    "data" => $responseData,
+                    "data" => $singleRecord,
                 ]);
                 // Check if the generateSong method was successful
             } elseif ($response->successful()) {
                 $responseData = $response->json();
+                // dd($responseData);
                 $songId = $responseData["clips"][0]["id"] ?? null;
                 $accountId = $tokenData->account_id ?? null;
                 // return response()->json($songId);
@@ -158,11 +161,11 @@ class SongController extends Controller
                 }
 
                 // return response()->json($responseData);
-                ProcessMusicFeed::dispatch($songId, $accountId, $token);
-
+              $insert_response =  ProcessMusicFeed::dispatch($songId, $accountId, $token);
+// dd($insert_response);
                 return response()->json([
                     "message" => "Music generation started",
-                    "song_id" => $songId,
+                    "song_id" => $insert_response->id,
                     "account_id" => $accountId,
                     "data" => $responseData,
                 ]);
@@ -175,7 +178,7 @@ class SongController extends Controller
                 "api_url" =>
                     "https://suno-v2.chataiappgpt.workers.dev/generate",
                 "error" => $e->getMessage(),
-                "user_id" => auth()->user()->id,
+                "user_id" => auth()->user()->id ?? 1,
             ]);
             // Log::error('Music generation failed:', [
             //     'error' => $e->getMessage(),
