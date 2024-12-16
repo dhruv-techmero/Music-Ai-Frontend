@@ -418,6 +418,7 @@ class SongController extends Controller
     {
         try {
             $userId = auth()->user()->id ?? 1;  
+            
             $title = $request->input("title");
             $songs = Song::where("title", "like", "%" . $title . "%")
                 ->where("user_id", )
