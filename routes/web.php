@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\MusicController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SongGeneratorController;
 use App\Http\Controllers\User\AuthController;

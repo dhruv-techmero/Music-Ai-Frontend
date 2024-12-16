@@ -6,9 +6,9 @@
           <section class="relative">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
               <div class="flex flex-col items-center justify-center gap-8">
-                <h1 class="w-full lg:max-w-4xl mx-auto text-4xl text-center font-semibold md:text-6xl !leading-[120%]">AI Song Generator Free Online</h1>
-                <p class="w-full lg:max-w-3xl mx-auto text-base text-center text-fuchsia-300">Create high-quality, royalty-free music in seconds with the AI song generator. Enjoy free online access and generate unique songs for any project.</p>
-                <div class="w-full mt-6 flex items-center justify-center">
+              <h1 class="w-full lg:max-w-4xl mx-auto text-4xl text-center font-semibold md:text-6xl !leading-[120%]">Free Online AI Music Creator</h1>
+<p class="w-full lg:max-w-3xl mx-auto text-base text-center text-fuchsia-300">Quickly craft royalty-free, professional-quality music with our AI-powered song creator. Access it online for free and generate custom tunes for any project.</p>
+    <div class="w-full mt-6 flex items-center justify-center">
                   <a class="px-6 py-3 tracking-wide rounded-full uppercase text-zinc-800 text-lg border border-fuchsia-300/10 bg-fuchsia-400 backdrop-blur-md shadow-xl shadow-fuchsia-500/10 font-semibold overflow-hidden flex items-center gap-2 relative z-0 transition duration-500
                                 before:absolute before:inset-0 before:-z-10 before:translate-x-[150%] before:translate-y-[150%] before:scale-[2.5] before:rounded-[100%] before:bg-fuchsia-300 before:transition-transform before:duration-1000 before:content-[&quot;&quot;]
                                 hover:scale-105 hover:text-neutral-900 hover:before:translate-x-[0%] hover:before:translate-y-[0%] active:scale-95" href="{{ route('song-generate-view') }}">Create Your Song Now</a>
@@ -239,33 +239,34 @@
             </svg>
           </span>
           <div style="opacity: 1; transform: none;">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
-              <h2 class="text-xl font-semibold md:text-3xl text-center">How to Create AI Song Generator with SongGenerator.io</h2>
-              <ul class="w-full mt-6 md:mt-14 lg:mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-12">
-                <li class="w-full flex flex-col items-center justify-center gap-1.5">
-                  <span class="w-12 h-12 rounded-full bg-gradient-to-tl from-fuchsia-400 to-gray-900 text-xl font-medium shadow-xl shadow-fuchsia-500/30 inline-flex items-center justify-center">0
-                    <!-- -->1
-                  </span>
-                  <h3 class="font-medium text-xl flex items-center gap-1.5">Input Your Song Description</h3>
-                  <p class="w-full mt-3 text-base text-zinc-300 whitespace-pre-line">Begin by entering the details of your song. Describe the song's style and elements, or directly input lyrics and musical style to generate a customized track using the AI song generator.</p>
-                </li>
-                <li class="w-full flex flex-col items-center justify-center gap-1.5">
-                  <span class="w-12 h-12 rounded-full bg-gradient-to-tl from-fuchsia-400 to-gray-900 text-xl font-medium shadow-xl shadow-fuchsia-500/30 inline-flex items-center justify-center">0
-                    <!-- -->2
-                  </span>
-                  <h3 class="font-medium text-xl flex items-center gap-1.5">Listen and Optimize</h3>
-                  <p class="w-full mt-3 text-base text-zinc-300 whitespace-pre-line">In just a minute, the AI song generator will create your song. Listen to the generated song. If you are not satisfied, adjust your descriptions to further refine the track.</p>
-                </li>
-                <li class="w-full flex flex-col items-center justify-center gap-1.5">
-                  <span class="w-12 h-12 rounded-full bg-gradient-to-tl from-fuchsia-400 to-gray-900 text-xl font-medium shadow-xl shadow-fuchsia-500/30 inline-flex items-center justify-center">0
-                    <!-- -->3
-                  </span>
-                  <h3 class="font-medium text-xl flex items-center gap-1.5">Download Your Song</h3>
-                  <p class="w-full mt-3 text-base text-zinc-300 whitespace-pre-line">After finalizing your song, use the AI song generator free online feature to download your completed track. Your professional-quality song is now ready for use in any project.</p>
-                </li>
-              </ul>
-            </div>
-          </div>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
+    <h2 class="text-xl font-semibold md:text-3xl text-center">Steps to Create Songs with Music AI</h2>
+    <ul class="w-full mt-6 md:mt-14 lg:mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-12">
+      <li class="w-full flex flex-col items-center justify-center gap-1.5">
+        <span class="w-12 h-12 rounded-full bg-gradient-to-tl from-fuchsia-400 to-gray-900 text-xl font-medium shadow-xl shadow-fuchsia-500/30 inline-flex items-center justify-center">0
+          <!-- -->1
+        </span>
+        <h3 class="font-medium text-xl flex items-center gap-1.5">Provide Song Details</h3>
+        <p class="w-full mt-3 text-base text-zinc-300 whitespace-pre-line">Start by filling in the specifics of your song. Share the song's genre, vibe, or add lyrics and musical style for personalized track generation using Music AI.</p>
+      </li>
+      <li class="w-full flex flex-col items-center justify-center gap-1.5">
+        <span class="w-12 h-12 rounded-full bg-gradient-to-tl from-fuchsia-400 to-gray-900 text-xl font-medium shadow-xl shadow-fuchsia-500/30 inline-flex items-center justify-center">0
+          <!-- -->2
+        </span>
+        <h3 class="font-medium text-xl flex items-center gap-1.5">Review and Refine</h3>
+        <p class="w-full mt-3 text-base text-zinc-300 whitespace-pre-line">Within a minute, the AI will generate your song. Listen and evaluate the output. Modify your inputs to tweak and improve the generated track as needed.</p>
+      </li>
+      <li class="w-full flex flex-col items-center justify-center gap-1.5">
+        <span class="w-12 h-12 rounded-full bg-gradient-to-tl from-fuchsia-400 to-gray-900 text-xl font-medium shadow-xl shadow-fuchsia-500/30 inline-flex items-center justify-center">0
+          <!-- -->3
+        </span>
+        <h3 class="font-medium text-xl flex items-center gap-1.5">Download Your Final Track</h3>
+        <p class="w-full mt-3 text-base text-zinc-300 whitespace-pre-line">Once satisfied with your song, use the free AI music generator tool to download your finished track. Your high-quality, ready-to-use song is complete for any project.</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
         </section>
         <section class="py-10 md:py-16 relative overflow-hidden">
           <span>
@@ -473,9 +474,10 @@
           <div style="opacity: 1; transform: none;">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
               <div class="w-full mx-auto text-center">
-                <h2 class="text-2xl font-semibold md:text-4xl !leading-[120%]">Royalty-Free Commercial Use with AI Song Generator</h2>
-                <p class="w-full mt-6 lg:mt-10 mx-auto text-sm text-gray-200">The AI song generator offers high-quality, royalty-free music tracks that are perfect for commercial use. All tracks generated are ethically sourced, ensuring you can use them in your projects without legal concerns. Whether you are creating music for videos, podcasts, games, advertisements, or other creative ventures, The AI song generator provides you with the flexibility to produce and use your content with ease. Enjoy the peace of mind that comes with knowing your songs are unique, ethically compliant, and free from copyright issues, allowing you to focus on creativity and innovation in your work.</p>
-              </div>
+              <h2 class="text-2xl font-semibold md:text-4xl !leading-[120%]">Create Royalty-Free Music for Commercial Projects</h2>
+<p class="w-full mt-6 lg:mt-10 mx-auto text-sm text-gray-200">Generate professional, royalty-free music tailored for commercial use with ease. The AI song generator ensures ethically created tracks, perfect for videos, podcasts, games, advertisements, and more. Enjoy seamless integration into your projects with music that is unique, legally compliant, and free from copyright hassles. Focus on bringing your creative vision to life while we handle the complexities of music generation for you.</p>
+
+            </div>
             </div>
           </div>
         </section>

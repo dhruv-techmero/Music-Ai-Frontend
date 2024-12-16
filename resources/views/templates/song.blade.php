@@ -32,7 +32,7 @@ function dispatchSongStateEvent(isPlaying) {
 }
 
 const songTemplate = `
-  <div class="w-full  p-4 pb-32 lg:p-10 overflow-y-auto" style="height:600px">
+  <div class="w-full ] p-4 pb-32 lg:p-10 overflow-y-auto" style="height:600px">
     <div class="w-full">
       <img alt="cover" loading="lazy" width="100" height="100" decoding="async" data-nimg="1" class="w-full h-full object-cover blur-xl opacity-50 absolute top-0 left-0 z-[-1]" src="" style="color: transparent;" />
       <div class="w-1/2 lg:w-1/3 mx-auto">
@@ -66,7 +66,7 @@ const songTemplate = `
         <div class="rhap_main rhap_horizontal">
           <div class="rhap_progress-section">
             <div class="rhap_main-controls">
-              <button aria-label="Rewind" class="rhap_button-clear rhap_main-controls-button rhap_rewind-button" type="button" fdprocessedid="xf6r3s">
+              <button aria-label="Rewind" id="rewind" class="rhap_button-clear rhap_main-controls-button rhap_rewind-button" type="button" fdprocessedid="xf6r3s">
                 <span>
                   <svg class="w-6 h-6 fill-gray-100" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M6.22 11.03a.75.75 0 1 0 1.06-1.06l-1.06 1.06ZM3 6.75l-.53-.53a.75.75 0 0 0 0 1.06L3 6.75Zm4.28-3.22a.75.75 0 0 0-1.06-1.06l1.06 1.06ZM13.5 18a.75.75 0 0 0 0 1.5V18ZM7.28 9.97 3.53 6.22 2.47 7.28l3.75 3.75 1.06-1.06ZM3.53 7.28l3.75-3.75-1.06-1.06-3.75 3.75 1.06 1.06Zm16.72 5.47c0 2.9-2.35 5.25-5.25 5.25v1.5a6.75 6.75 0 0 0 6.75-6.75h-1.5ZM15 7.5c2.9 0 5.25 2.35 5.25 5.25h1.5A6.75 6.75 0 0 0 15 6v1.5ZM15 6H3v1.5h12V6Zm0 12h-1.5v1.5H15V18Z"></path>
@@ -82,7 +82,7 @@ const songTemplate = `
                   </svg>
                 </span>
               </button>
-              <button aria-label="Forward" class="rhap_button-clear rhap_main-controls-button rhap_forward-button" type="button" fdprocessedid="ncdmo8">
+              <button aria-label="Forward" id="forward" class="rhap_button-clear rhap_main-controls-button rhap_forward-button" type="button" fdprocessedid="ncdmo8">
                 <span>
                   <svg class="w-6 h-6 fill-gray-100" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M16.72 9.97a.75.75 0 1 0 1.06 1.06l-1.06-1.06ZM21 6.75l.53.53a.75.75 0 0 0 0-1.06l-.53.53Zm-3.22-4.28a.75.75 0 1 0-1.06 1.06l1.06-1.06ZM10.5 19.5a.75.75 0 0 0 0-1.5v1.5Zm3.75-4.5a.75.75 0 0 0 0 1.5V15Zm.75.75h.75A.75.75 0 0 0 15 15v.75ZM14.25 21a.75.75 0 0 0 1.5 0h-1.5Zm6-4.5a.75.75 0 0 0 0-1.5v1.5ZM18 15.75V15a.75.75 0 0 0-.75.75H18ZM18 18h-.75c0 .414.336.75.75.75V18Zm0 2.25a.75.75 0 0 0 0 1.5v-1.5Zm-.22-9.22 3.75-3.75-1.06-1.06-3.75 3.75 1.06 1.06Zm3.75-4.81-3.75-3.75-1.06 1.06 3.75 3.75 1.06-1.06ZM2.25 12.75A6.75 6.75 0 0 0 9 19.5V18a5.25 5.25 0 0 1-5.25-5.25h-1.5ZM9 6a6.75 6.75 0 0 0-6.75 6.75h1.5C3.75 9.85 6.1 7.5 9 7.5V6Zm0 1.5h12V6H9v1.5Zm0 12h1.5V18H9v1.5Zm5.25-3H15V15h-.75v1.5Zm0-.75V21h1.5v-5.25h-1.5Zm6-.75H18v1.5h2.25V15Zm-3 .75V18h1.5v-2.25h-1.5Zm.75 3h1.5v-1.5H18v1.5Zm1.5 1.5H18v1.5h1.5v-1.5Zm.75-.75a.75.75 0 0 1-.75.75v1.5a2.25 2.25 0 0 0 2.25-2.25h-1.5Zm-.75-.75a.75.75 0 0 1 .75.75h1.5a2.25 2.25 0 0 0-2.25-2.25v1.5Z"></path>
@@ -245,6 +245,8 @@ window.addEventListener('playSong', function(event) {
         const progressIndicator = document.querySelector('.rhap_progress-indicator');
         const currentTimeDisplay = document.querySelector('.rhap_current-time');
         const totalTimeDisplay = document.querySelector('.rhap_total-time');
+        const forward = document.querySelector('#forward');
+        const rewind = document.querySelector('#rewind');
 
         // Update progress bar and time displays
         audioElement.addEventListener('timeupdate', () => {
@@ -264,6 +266,17 @@ window.addEventListener('playSong', function(event) {
             audioElement.currentTime = pos * audioElement.duration;
         });
 
+        forward.addEventListener('click',(e) => {
+          // console.log( Math.min(audioElement.currentTime + 7.5, audioElement.duration));
+          // audioElement.currentTime = pos * audioElement.duration;
+          audioElement.currentTime = Math.min(audioElement.currentTime + 7.5, audioElement.duration);
+
+        });
+        rewind.addEventListener('click',(e) => {
+          // audioElement.currentTime = pos * audioElement.duration;
+          audioElement.currentTime = Math.min(audioElement.currentTime - 7.5, audioElement.duration);
+
+        });
         // Volume control functionality
         const volumeButton = document.querySelector('.rhap_volume-button');
         const volumeBar = document.querySelector('.rhap_volume-bar');
