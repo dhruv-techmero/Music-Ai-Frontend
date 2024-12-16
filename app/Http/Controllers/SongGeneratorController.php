@@ -40,7 +40,6 @@ class SongGeneratorController extends Controller
     
             // Main request with token
             $response = $this->makeApiRequest($token, $data);
-    // dd($response->json());
             if ($response->successful()) {
                 return $this->handleSuccessfulResponse($response, $token);
             }
@@ -52,7 +51,7 @@ class SongGeneratorController extends Controller
         }
     }
     
-    private function getTokenData()
+    public function getTokenData()
     {
         
         $songController = new SongController();
@@ -61,7 +60,7 @@ class SongGeneratorController extends Controller
         return json_decode($tokenResponse->getContent());
     }
     
-    private function makeApiRequest($token, $data)
+    public function makeApiRequest($token, $data)
     {
         return Http::withHeaders([
             "Content-Type" => "application/json; charset=utf-8",
@@ -71,7 +70,7 @@ class SongGeneratorController extends Controller
           ->post("https://suno-v2.chataiappgpt.workers.dev/generate");
     }
     
-    private function handleSuccessfulResponse($response, $token)
+    public function handleSuccessfulResponse($response, $token)
     {
         $responseData = $response->json();
         $songId = $responseData["clips"][0]["id"] ?? null;
@@ -92,7 +91,7 @@ class SongGeneratorController extends Controller
         ]);
     }
     
-    private function handleFailedResponse($prompt)
+    public function handleFailedResponse($prompt)
     {
         $generateResponse = $this->generateSong($prompt);
         $responseData = json_decode($generateResponse->getContent(), true);
@@ -110,7 +109,7 @@ class SongGeneratorController extends Controller
         ]);
     }
     
-    private function generateSong($prompt)
+    public function generateSong($prompt)
     {
         try {
             $response = $this->callSongGenerationApi($prompt);
@@ -131,7 +130,7 @@ class SongGeneratorController extends Controller
         }
     }
     
-    private function callSongGenerationApi($prompt)
+    public function callSongGenerationApi($prompt)
     {
         return Http::withHeaders(["Content-Type" => "application/json"])
             ->post("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-8b:generateContent?key=" . env("GOOGLE_API_KEY"), [
@@ -144,7 +143,7 @@ class SongGeneratorController extends Controller
             ]);
     }
     
-    private function extractRawText($responseData)
+    public function extractRawText($responseData)
     {
         $rawText = $responseData["candidates"][0]["content"]["parts"][0]["text"] ?? null;
         if (!$rawText) {
@@ -153,7 +152,7 @@ class SongGeneratorController extends Controller
         return trim(str_replace(["```json", "```"], "", $rawText));
     }
     
-    private function getSongSearchTerm($rawText)
+    public function getSongSearchTerm($rawText)
     {
         $decodedResponse = json_decode($rawText, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -168,7 +167,7 @@ class SongGeneratorController extends Controller
         return $songSearchTerm;
     }
     
-    private function fetchSongDetails($songSearchTerm, $token)
+    public function fetchSongDetails($songSearchTerm, $token)
     {
         $response = Http::withHeaders([
             "Content-Type" => "application/json",
@@ -192,7 +191,7 @@ class SongGeneratorController extends Controller
         return response()->json($response->json());
     }
     
-    private function logError($exception)
+    public function logError($exception)
     {
         ActivityLog::create([
             "api_url" => "https://suno-v2.chataiappgpt.workers.dev/generate",

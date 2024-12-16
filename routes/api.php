@@ -5,6 +5,7 @@ use App\Http\Controllers\SongGeneratorController;
 use App\Http\Controllers\Website\SongController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AICompositionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,11 @@ Route::get('token',[SongController::class,'getToken']);
 
 Route::post('prompt-mode',[SongGeneratorController::class,'lyricalMode']);
 Route::options('prompt-mode', ['POST']);
+
+Route::post('custom-mode',[AICompositionController::class,'customMode']);
+Route::options('custom-mode', ['POST']);
+
+
 
 Route::get('/feed', [SongController::class, 'singleFeed']);
 Route::options('/feed', ['GET']);

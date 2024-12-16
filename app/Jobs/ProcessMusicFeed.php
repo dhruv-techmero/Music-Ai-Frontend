@@ -60,7 +60,7 @@ class ProcessMusicFeed implements ShouldQueue
                         'user_id' => auth()->user()->id ?? 1,
                         'account_id' => (int)$this->accountId,
                         'title' => $data['clips'][0]['title'] ?? null,
-                        'metadata' => json_encode($data['clips'][0] ?? []),
+                        'metadata' => $data['clips'][0] ?? [],
                         'audio_url' => $data['clips'][0]['audio_url'] ?? null,
                         'image_url' => $data['clips'][0]['image_url'] ?? null,
                         'video_url' => $data['clips'][0]['video_url'] ?? null,
