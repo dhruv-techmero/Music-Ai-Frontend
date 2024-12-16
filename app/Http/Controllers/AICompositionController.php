@@ -35,7 +35,7 @@ class AICompositionController extends Controller
                 "token" => null,
                 
             ];
-    // dd($data);
+    
             // Main request with token
             $response = $SongGeneratorController->makeApiRequest($token, $data);
             // dd($response);

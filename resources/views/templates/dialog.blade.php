@@ -21,12 +21,12 @@
     <div class="w-full max-h-[360px] pr-2 overflow-y-auto">
       <div class="w-full mx-auto px-2 mb-2 grid grid-cols-1 gap-2">
         <div class="drawer-content-container w-full flex flex-col items-start gap-4">
-          <div class="w-full p-2 bg-gray-500/5 rounded-lg flex items-center justify-between">
+          <!-- <div class="w-full p-2 bg-gray-500/5 rounded-lg flex items-center justify-between">
             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 px-2 inline-flex items-center gap-1 text-gray-600" for="drawer-custom-mode">Custom Mode</label>
             <button type="button" role="switch" aria-checked="false" data-state="unchecked" value="on" class="drawer-toggle peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input" id="drawer-custom-mode">
               <span class="drawer-toggle-knob pointer-events-none block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform duration-200"></span>
             </button>
-          </div>
+          </div> -->
           <div class="drawer-description-section w-full flex flex-col items-start space-y-2">
             <div class="w-full flex flex-col items-start gap-2">
               <label class="text-sm px-2 inline-flex items-center gap-1 text-gray-600" for="song-description">Song Description</label>
@@ -93,7 +93,7 @@
               <span data-state="unchecked" class="pointer-events-none block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0"></span>
             </button>
           </div>
-          <div class="w-full flex flex-col items-start space-y-2 hidden drawer-custom-fields">
+          <!-- <div class="w-full flex flex-col items-start space-y-2">
             <div class="w-full flex flex-col items-start gap-2">
               <label class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm px-2 inline-flex items-center gap-1 text-gray-600" for="Lyrics">Lyrics <span type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rc:" data-state="closed">
                   <span>
@@ -104,11 +104,11 @@
                 </span>
               </label>
               <div class="w-full px-2 py-1 rounded-md border border-gray-500/20 bg-gray-500/5 relative">
-                <textarea placeholder="Write your own lyrics, two verses (8 lines) for the best result" class="w-full h-20 p-1 bg-transparent border-none text-sm text-gray-600 outline-none resize-none overflow-y-auto disabled:cursor-not-allowed disabled:text-gray-1000 disabled:ring-gray-200 dialog-custom-lyrics"></textarea>
+                <textarea placeholder="Write your own lyrics, two verses (8 lines) for the best result" class="w-full h-20 p-1 bg-transparent border-none text-sm text-gray-600 outline-none resize-none overflow-y-auto disabled:cursor-not-allowed disabled:text-gray-1000 disabled:ring-gray-200"></textarea>
                 <div class="w-full text-xs text-gray-400 text-right">0/2999</div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="mt-auto flex flex-col gap-2 p-4">
@@ -219,66 +219,7 @@
             $('textarea[placeholder*="Describe the style of music"]').val('');
           }
         });
-      }else {
-        // alert('asda');
-          const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-          const url = "{{ env('ROUTE_URL').'website/song/custom-mode' }}";
-          
-          // Get values from custom fields
-          const title = document.getElementById('suno-title-music').value;
-          const tags = document.getElementById('style-of-music').value;
-          const prompt = document.querySelector('.dialog-custom-lyrics').value;
-          // alert(prompt);
-          const isInstrumental = document.getElementById('instrumental').getAttribute('aria-checked') === 'true';
-          // console.log(prompt);
-          fetch(url, {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/json',
-                  'X-CSRF-TOKEN': token
-              },
-              body: JSON.stringify({
-                  title: title,
-                  gpt_description_prompt: null,
-                  tags: tags,
-                  make_instrumental: isInstrumental,
-                  mv: 'chirp-v3-5',
-                  prompt: prompt
-              })
-          })
-          .then(response => {
-              if (!response.ok) {
-                  throw new Error(`HTTP error! status: ${response.status}`);
-              }
-              return response.json();
-          })
-          .then(data => {
-              // Trigger song loading and playback
-              loadSongs(); // Assuming this function exists
-              window.dispatchEvent(new CustomEvent('playSong', { 
-                  detail: data.data 
-              }));
-      
-              // Close the drawer after successful generation
-              closeDrawer();
-      
-              // Clear form fields
-              document.getElementById('suno-title-music').value = '';
-              document.getElementById('style-of-music').value = '';
-              document.querySelector('textarea[placeholder*="Write your own lyrics"]').value = '';
-          })
-          .catch(error => {
-              console.error('Error:', error);
-              alert('Failed to generate music. Please try again.');
-          })
-          .finally(() => {
-              // Reset button
-              $button.html('Generate Music <span><svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-4 h-4 fill-white" preserveAspectRatio="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M839.8 64c-70.71 0.78-169.12 46.32-236.88 69.2-46.6 15.73-92.32 38.38-140.56 48.83-41.74 9-82.08 5-123.85 10.9-15 2.13-24.41 19.25-25 32.85-3 68.09 14.54 140.18 26.67 207.8-2.68 49.21-6.9 98.4-14.56 148-5.5 35.65-11.13 70.83-4.43 103.84a381.35 381.35 0 0 0-62.92 11.39c-57.61 15.4-117.48 38.31-140.19 98.42-6.42 17-8.07 32.75-6.44 47.32 2.9 53.95 43.24 104.38 108.7 114.9 105.45 16.95 259.74-52.53 251-175.55-3.38-47.39-27.07-73.67-59.35-86.8 9.16-46.45-2.33-115-4.16-139.08-3.87-51-13.07-104.6-20.15-158.29 146.72-2.09 286.82-89.37 430.54-106.87a44 44 0 0 0 10.11-2.53c-8.75 111.27-7.82 233.35-31.33 341.9a160.55 160.55 0 0 1-16.33-1.81c-14.2-2.2-27.69-1.59-42-0.74-36.26 2.16-74.24 11.55-105.32 30.69-112.76 69.42-75.56 228.92 55.54 241.35s220.56-105.33 165.8-211.06c21.71-27.3 16.61-107.71 19-128.68 10-87.75 16-175.91 23.39-263.92C902.63 229.7 952.84 62.76 839.8 64zM701.17 834.71q-68.95-137.57 37.44-134.85a179.65 179.65 0 0 1 50 2.7c8.58 13.74 16 28.09 21.33 43.65q-23.52 86.18-108.77 88.5z m-300.66-67.25c7.3 0.55 12.1-3.06 14.94-8 22.54 38.86-9.6 94.7-43.3 115.37-22.86 14-54 25.82-84.36 32.12 7.32-17.88 13.4-36.18 17.23-55.18 0.78-3.88-5.15-5.56-6-1.65a262.52 262.52 0 0 1-19.73 58.48 199.25 199.25 0 0 1-35.72 3.26 109.82 109.82 0 0 1-21.86-2.67c0.24-46 33.64-90.91 52.21-130.84 2.53-5.43-5.55-10.2-8.09-4.73-19.42 41.77-52.93 84.92-56.31 132.32-0.64-0.21-1.35-0.3-2-0.53 3.81-9.12 2.2-20-9.6-26.5-1.46-0.81-2.6-1.68-4-2.51 8-38.4 23.13-77.56 47.27-107.64 3.89-4.84-2.6-11.76-7-7-25.15 27.39-44.37 67.49-52.4 106-45.32-37.88-7.9-89.13 45.1-109.74a375 375 0 0 1 38.83-12.42 10.07 10.07 0 0 0 6.17 2.59c17.54 1.15 34.08 6.33 51 10.42a2.86 2.86 0 0 0 2.58 3.72l9.64 0.44a4.69 4.69 0 0 0 3-0.93c20.65 3.57 41.62 4.04 62.4 5.62z m435.88-540.29c-6.91-4.54-16-6.66-27.42-4.33-146.11 30-277.25 119.28-425 145.17-4.18-37.26-6.65-74.37-4.8-110.52 34-1.4 67.12-0.32 101.54-9 59.74-15.15 116.45-41.42 175.19-59.85 31.27-9.81 147.7-63.62 175.59-51.51 14.64 6.34 10.39 51.75 4.9 90.04z"></path></svg></span>');
-              $button.prop('disabled', false);
-          });
       }
-      // }
     });
 
     // Style Tag Buttons
