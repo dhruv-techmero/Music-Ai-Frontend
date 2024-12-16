@@ -416,6 +416,8 @@ class SongController extends Controller
     public function search(Request $request)
     {
         try {
+          $userId = auth()->user()->id ?? 1;  
+            
             $title = $request->input("title");
             $songs = Song::where("title", "like", "%" . $title . "%")
                 ->where("user_id", auth()->user()->id)
