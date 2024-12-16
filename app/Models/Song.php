@@ -45,7 +45,7 @@ class Song extends Model
     ];
 
     protected $casts = [
-        'metadata' => 'array',
+        'metadata' => 'object',
         'is_liked' => 'boolean',
         'is_trashed' => 'boolean',
         'is_public' => 'boolean',
@@ -229,7 +229,7 @@ class Song extends Model
                 'user_id' => $user_id,
                 'account_id' => (int) $accountId,
                 'title' => $data['title'] ?? null,
-                'metadata' => json_encode($data['metadata'] ?? []),
+                'metadata' => $data['metadata'] ?? [],
                 'audio_url' => $data['audio_url'] ?? null,
                 'image_url' => $data['image_url'] ?? null,
                 'video_url' => $data['video_url'] ?? null,
@@ -238,5 +238,19 @@ class Song extends Model
         );
 
         return $song;
+    }
+
+
+    public function convertJsonToObject()
+    {
+        self::get()->map(function ($song) {
+            if (is_string($song->metadata)) {
+                $decoded_object = json_decode($song->metadata);
+                if ($decoded_object !== null) {
+                    $song->metadata = $decoded_object;      
+                    $song->save();
+                }
+            }
+        });
     }
 }
