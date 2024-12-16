@@ -39,7 +39,7 @@ function loadSongs(searchQuery = '') {
                 
                 // Fetch and play the first song
                 $.ajax({
-                    url: `${url}website/song/?song_id=${firstSong.song_id}`,
+                    url: `${url}website/song/play/${firstSong.song_id}`,
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
