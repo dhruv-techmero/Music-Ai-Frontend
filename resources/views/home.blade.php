@@ -26,7 +26,7 @@
                     <div class="w-full p-2 rounded-lg bg-white/5 backdrop-blur-md shadow-lg shadow-fuchsia-500/5 border hover:bg-fuchsia-500/5 transition duration-500 group flex items-start justify-between gap-2 border-fuchsia-500">
                       <div class="w-16 h-16 rounded-md relative transition duration-500 group cursor-pointer play-button" data-audio-url="{{ $song['audio_url'] }}">
                         <div class="w-full h-full rounded-md relative">
-                          <img alt="{{ $song['title'] }}" loading="lazy" width="100" height="100" decoding="async" data-nimg="1" class="w-full h-full rounded-md object-cover" src="{{ $song['image_url'] }}" onerror="this.onerror=null; this.src='{{ asset('images/default-song.png') }}'">
+                          <img alt="{{ $song['title'] }}" loading="lazy" width="100" height="100" decoding="async" data-nimg="1" class="w-full h-full rounded-md object-cover" src="{{ $song['image_url'] }}" onerror="this.onerror=null; this.src='{{  env('LOCAL_URL').'images/default-song.png' }}'">
                         </div>
                         <div class="w-full h-full absolute top-0 left-0 text-gray-100 bg-white/40 rounded-md transition duration-500 inline-flex items-center justify-center">
                           <span>
@@ -470,7 +470,7 @@
           </div>
         </section>
         <section class="py-10 md:py-16 overflow-hidden relative">
-          <img alt="plate" loading="lazy" width="100" height="100" decoding="async" data-nimg="1" class="w-full h-full object-cover absolute top-0 left-0 opacity-10" src="{{ asset('images/bg-plate-1.webp') }}" onerror="this.onerror=null; this.src='{{ asset('images/default-background.png') }}'">
+          <img alt="plate" loading="lazy" width="100" height="100" decoding="async" data-nimg="1" class="w-full h-full object-cover absolute top-0 left-0 opacity-10" src="{{ env('LOCAL_URL').'images/bg-plate-1.webp' }}" >
           <div style="opacity: 1; transform: none;">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
               <div class="w-full mx-auto text-center">

@@ -35,6 +35,7 @@ class SongGeneratorController extends Controller
                 "tags" => $request->input("tags", ""),
                 "title" => $request->input("title", "Using subscribed account"),
                 "token" => null,
+                
             ];
     
             // Main request with token

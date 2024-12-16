@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ asset('website-assets/css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('website-assets/css/embeded.css') }}">
-    <link rel="stylesheet" href="{{ asset('website-assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ env('LOCAL_URL').'website-assets/css/main.css' }}">
+    <link rel="stylesheet" href="{{ env('LOCAL_URL').'website-assets/css/embeded.css' }}">
+    <link rel="stylesheet" href="{{ env('LOCAL_URL').'website-assets/css/style.css' }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
   </head>
   <style>
@@ -154,7 +154,7 @@
 
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('website-assets/js/main.js') }}"></script>
+    <script src="{{ env('LOCAL_URL').'website-assets/js/main.js' }}"></script>
     <script>
       // Add preloader script
       window.addEventListener('load', function() {
