@@ -436,5 +436,52 @@ class SongController extends Controller
         }
     }
 
+    public function getSingleSongApi($id)
+    {
+        try {
+            // Validate ID
+            if (!$id) {
+                return response()->json(
+                    [
+                        "error" => "Invalid ID",
+                    ],
+                    400 // Bad Request
+                );
+            }
+    
+            // Fetch the song by ID
+            $song = Song::where('song_id', $id)->first();
+    
+            // Check if the song was found
+            if (!$song) {
+                return response()->json(
+                    [
+                        "error" => "Song not found",
+                    ],
+                    404 // Not Found
+                );
+            }
+    
+            // Return the song as JSON response
+            return response()->json($song, 200); // OK
+        } catch (Exception $e) {
+            // Log the error details
+            Log::error("Song fetch failed:", [
+                "error" => $e->getMessage(),
+                "trace" => $e->getTraceAsString(),
+            ]);
+    
+            // Return error response
+            return response()->json(
+                [
+                    "error" => "Failed to fetch song",
+                    "message" => $e->getMessage(),
+                ],
+                500 // Internal Server Error
+            );
+        }
+    }
+    
+
    
 }
