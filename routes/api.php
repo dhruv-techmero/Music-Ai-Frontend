@@ -28,8 +28,11 @@ Route::get('token',[SongController::class,'getToken']);
 Route::post('prompt-mode',[SongGeneratorController::class,'lyricalMode']);
 Route::options('prompt-mode', ['POST']);
 
-
 Route::get('/feed', [SongController::class, 'singleFeed']);
 Route::options('/feed', ['GET']);
+
+Route::get('/single-song/{id}', [SongController::class, 'getSingleSongApi']);
+Route::options('/single-song/{id}', ['GET']);
+
 Route::get('list', [SongController::class, 'songList']);
 Route::get('generate-song', [SongController::class, 'songPage'])->name('song-generate-view');
