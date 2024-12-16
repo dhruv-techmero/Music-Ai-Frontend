@@ -357,12 +357,10 @@ class SongController extends Controller
         }
     }
 
-    public function song(Request $request)
+    public function song($id=null)
     {
-        $songId = $request->input("song_id");
-        // $accountId = $request->input('account_id');
         try {
-            $music = Song::where("song_id", $songId)
+            $music = Song::where("song_id", $id)
                 ->whereNotNull("audio_url")
                 ->first();
 
@@ -380,7 +378,6 @@ class SongController extends Controller
             );
         }
     }
-
     public function songList()
     {
         try {

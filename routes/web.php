@@ -37,9 +37,8 @@ Route::group(['prefix' => 'website', 'middleware' => 'user_auth'], function() {
         Route::post('web-prompt-mode', [SongGeneratorController::class,'lyricalMode']);
         Route::options('/web-prompt-mode', ['POST']);
         Route::controller(SongController::class)->group(function () {
-            Route::get('/', 'song');
+            Route::get('/play/{id?}', 'song');
             Route::get('/search', 'search');
-    
     
             Route::get('/feed', 'singleFeed');
             Route::options('/feed', ['GET']);
