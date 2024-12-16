@@ -40,6 +40,7 @@ class SongGeneratorController extends Controller
     
             // Main request with token
             $response = $this->makeApiRequest($token, $data);
+            // dd($response->body());
             if ($response->successful()) {
                 return $this->handleSuccessfulResponse($response, $token);
             }
@@ -95,6 +96,7 @@ class SongGeneratorController extends Controller
     {
         $generateResponse = $this->generateSong($prompt);
         $responseData = json_decode($generateResponse->getContent(), true);
+        // dd($responseData);
         $singleRecord = $responseData["result"]["public_song"]["result"][0];
         $accountId = $this->getTokenData()->account_id ?? null;
     
@@ -113,7 +115,6 @@ class SongGeneratorController extends Controller
     {
         try {
             $response = $this->callSongGenerationApi($prompt);
-    
             if (!$response->successful()) {
                 throw new Exception("API request failed: " . $response->body());
             }

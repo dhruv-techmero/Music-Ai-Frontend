@@ -31,7 +31,7 @@
             <div class="w-full flex flex-col items-start gap-2">
               <label class="text-sm px-2 inline-flex items-center gap-1 text-gray-600" for="song-description">Song Description</label>
               <div class="w-full px-2 py-1 rounded-md border border-gray-500/20 bg-gray-500/5 relative">
-                <textarea placeholder="Describe the style of music and the topic you want, AI will generate lyrics for you." class="w-full h-24 p-1 bg-transparent border-none text-sm text-gray-600 outline-none resize-none overflow-y-auto"></textarea>
+                <textarea placeholder="Describe the style of music and the topic you want, AI will generate lyrics for you." class="w-full h-24 p-1 bg-transparent border-none text-sm text-gray-600 outline-none resize-none overflow-y-auto dialog-description"></textarea>
                 <div class="w-full text-xs text-gray-400 text-right">0/199</div>
               </div>
             </div>
@@ -175,15 +175,16 @@
       $button.html('<span class="loader"></span>');
       $button.prop('disabled', true);
 
-      const description = $('textarea[placeholder*="Describe the style of music"]').val();
+      const description = $('.dialog-description').val();
+      // alert(description);
       const isCustomMode = $('#drawer-custom-mode').attr('aria-checked') === 'true';
       const isInstrumental = $('#instrumental').attr('aria-checked') === 'true';
-      
+      console.log(description);
       if (!isCustomMode) {
         const token = $('meta[name="csrf-token"]').attr('content');
         
         $.ajax({
-          url: 'http://localhost:8000/website/song/web-prompt-mode',
+          url: '{{ env('LOCAL_URL') }}website/song/web-prompt-mode',
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
