@@ -7,6 +7,7 @@ use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\SongController;
 use App\Models\SunoAiSong;
 use Illuminate\Http\Request;
+use App\Http\Controllers\AICompositionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,8 @@ Route::group(['prefix' => 'website', 'middleware' => 'user_auth'], function() {
     Route::group(['prefix' => 'song'], function () {
         
         Route::post('web-prompt-mode', [SongGeneratorController::class,'lyricalMode']);
+        Route::post('custom-mode',[AICompositionController::class,'customMode']);
+
         Route::options('/web-prompt-mode', ['POST']);
         Route::controller(SongController::class)->group(function () {
             Route::get('/play/{id?}', 'song');

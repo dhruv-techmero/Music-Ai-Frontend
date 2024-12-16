@@ -57,11 +57,13 @@ class SongController extends Controller
             }
             throw new Exception("Failed to get token from all accounts");
         } catch (Exception $e) {
-            // ActivityLog::create([
-            //     "api_url" => "https://suno-v2.chataiappgpt.workers.dev/token",
-            //     "error" => $e->getMessage(),
-            //     "user_id" => auth()->user()->id ?? 1,
-            // ]);
+
+            ActivityLog::create([
+                "api_url" => "https://suno-v2.chataiappgpt.workers.dev/token",
+                "error" => $e->getMessage(),
+                "user_id" => auth()->user()->id ?? 1,
+            ]);
+
 
             return response()->json(
                 [
@@ -381,8 +383,9 @@ class SongController extends Controller
     public function songList()
     {
         try {
+            $userId = auth()->user()->id ?? 1;
             // Retrieve all records from the Music model
-            $records = Song::where("user_id", auth()->user()->id)
+            $records = Song::where("user_id", $userId)
                 ->latest()
                 ->get();
 
@@ -416,9 +419,10 @@ class SongController extends Controller
     public function search(Request $request)
     {
         try {
+            $userId = auth()->user()->id ?? 1;  
             $title = $request->input("title");
             $songs = Song::where("title", "like", "%" . $title . "%")
-                ->where("user_id", auth()->user()->id)
+                ->where("user_id", )
                 ->latest()
                 ->get();
             return response()->json(["data" => $songs, "status" => "success"]);
