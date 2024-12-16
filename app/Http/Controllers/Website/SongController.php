@@ -57,11 +57,13 @@ class SongController extends Controller
             }
             throw new Exception("Failed to get token from all accounts");
         } catch (Exception $e) {
+
             ActivityLog::create([
                 "api_url" => "https://suno-v2.chataiappgpt.workers.dev/token",
                 "error" => $e->getMessage(),
                 "user_id" => auth()->user()->id ?? 1,
             ]);
+
 
             return response()->json(
                 [
@@ -328,7 +330,7 @@ class SongController extends Controller
             if (!$token) {
                 throw new Exception("Failed to get valid token");
             }
-
+// dd($request->input("id"));
             $response = Http::withHeaders([
                 "Accept-Encoding" => "gzip, deflate",
                 "Authorization" => "Bearer " . $token,
