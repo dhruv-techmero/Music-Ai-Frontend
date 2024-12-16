@@ -184,7 +184,7 @@
         const token = $('meta[name="csrf-token"]').attr('content');
         
         $.ajax({
-          url: '{{ env('LOCAL_URL') }}website/song/web-prompt-mode',
+          url: '{{ env('ROUTE_URL') }}website/song/web-prompt-mode',
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
