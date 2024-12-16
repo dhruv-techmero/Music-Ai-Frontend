@@ -65,6 +65,7 @@ class ProcessMusicFeed implements ShouldQueue
                         'image_url' => $data['clips'][0]['image_url'] ?? null,
                         'video_url' => $data['clips'][0]['video_url'] ?? null,
                         'image_large_url' => $data['clips'][0]['image_large_url'] ?? null,
+                        'lyrics' => $data['clips'][0]['metadata'] ['prompt'] ?? null,
                     ]);
                     return $song; // Exit if successful
                 }
