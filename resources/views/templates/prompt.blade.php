@@ -116,7 +116,8 @@
     
     if (!isCustomMode) {
       const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-      fetch('http://localhost:8000/website/song/web-prompt-mode', {
+      const url = "{{ env('LOCAL_URL').'website/song/web-prompt-mode' }}";
+      fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
