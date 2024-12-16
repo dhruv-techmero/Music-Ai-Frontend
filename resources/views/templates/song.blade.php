@@ -1,15 +1,5 @@
-<!-- <div id="songContainer" style="height: 600px;"></div> -->
-<style>
-    #songContainer {
-        height: 600px;
-    }
-    @media screen and (max-width: 768px) {
-        #songContainer {
-            height: 400px;
-        }
-    }
-</style>
-<div id="songContainer"></div>
+<div id="songContainer" style="height: 600px;"></div>
+
 <script>
 // Add this new event listener near the top of your script
 window.addEventListener('togglePlayPause', function(event) {
