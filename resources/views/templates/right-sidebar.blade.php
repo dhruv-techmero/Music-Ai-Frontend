@@ -20,7 +20,7 @@
 
 <script>
 let currentlyPlayingSongId = null; // Track current song globally
-const url = "{{ env('LOCAL_URL') }}";
+const url = "{{ env('ROUTE_URL') }}";
 function loadSongs(searchQuery = '') {
     $.ajax({
         url: url+'website/song/list',
