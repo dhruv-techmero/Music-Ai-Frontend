@@ -107,9 +107,21 @@
 <script>
   document.getElementById('generate-music-btn').addEventListener('click', function() {
     const button = this;
-    // Show loader
-    button.innerHTML = '<span class="loader"></span>'; // Add loader HTML
-    button.disabled = true; // Disable button to prevent multiple clicks
+    let progress = 0;
+    const progressInterval = setInterval(() => {
+      if (progress < 95) {
+        progress += Math.random() * 15;
+        progress = Math.min(progress, 95);
+        const progressText = document.querySelector('.progress-text');
+        if (progressText) {
+          progressText.textContent = `${Math.round(progress)}%`;
+        }
+      }
+    }, 1000);
+
+    // Show loader with initial progress
+    button.innerHTML = '<div class="loader-container"><span class="loader"></span><span class="progress-text">0%</span></div>';
+    button.disabled = true;
 
     const description = document.querySelector('textarea[placeholder*="Describe the style"]').value;
     const isCustomMode = document.getElementById('custom-mode').getAttribute('aria-checked') === 'true';
@@ -125,10 +137,10 @@
           'X-CSRF-TOKEN': token
         },
         body: JSON.stringify({
-          gpt_description_prompt: null,
+          gpt_description_prompt: description,
           make_instrumental: false,
           mv: 'chirp-v3-5',
-          prompt: 'vocal female'
+          prompt: null
         })
       }).then(response => {
         if (!response.ok) {
@@ -136,25 +148,32 @@
         }
         return response.json();
       }).then(data => {
-        loadSongs(); // Assuming loadSongs is defined elsewhere
-        const event = new CustomEvent('playSong', { 
-                          detail: data.data 
-                      });
-                      window.dispatchEvent(event);
-        // Use the song_id from the response
+        clearInterval(progressInterval);
+        const progressText = document.querySelector('.progress-text');
+        if (progressText) {
+          progressText.textContent = '100%';
+        }
+        setTimeout(() => {
+          loadSongs();
+          const event = new CustomEvent('playSong', { 
+            detail: data.data 
+          });
+          window.dispatchEvent(event);
+        }, 500);
       }).catch(error => {
         console.error('Error:', error);
+        clearInterval(progressInterval);
       }).finally(() => {
-        // Remove loader and reset button
-        button.innerHTML = 'Generate Music'; // Reset button text
-        button.disabled = false; // Re-enable button
-        document.querySelector('textarea[placeholder*="Describe the style"]').value = ''; // Clear input
+        setTimeout(() => {
+          button.innerHTML = 'Generate Music';
+          button.disabled = false;
+          document.querySelector('textarea[placeholder*="Describe the style"]').value = '';
+        }, 500);
       });
-    }else{
+    } else {
       const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
       const url = "{{ env('ROUTE_URL').'website/song/custom-mode' }}";
       
-      // Get values from custom fields
       const title = document.getElementById('suno-title-music').value;
       const tags = document.getElementById('style-of-music').value;
       const prompt = document.querySelector('textarea[placeholder*="Write your own lyrics"]').value;
@@ -181,20 +200,29 @@
         }
         return response.json();
       }).then(data => {
-        loadSongs();
-        const event = new CustomEvent('playSong', { 
-          detail: data.data 
-        });
-        window.dispatchEvent(event);
+        clearInterval(progressInterval);
+        const progressText = document.querySelector('.progress-text');
+        if (progressText) {
+          progressText.textContent = '100%';
+        }
+        setTimeout(() => {
+          loadSongs();
+          const event = new CustomEvent('playSong', { 
+            detail: data.data 
+          });
+          window.dispatchEvent(event);
+        }, 500);
       }).catch(error => {
         console.error('Error:', error);
+        clearInterval(progressInterval);
       }).finally(() => {
-        // Reset form and button
-        button.innerHTML = 'Generate Music';
-        button.disabled = false;
-        document.getElementById('suno-title-music').value = '';
-        document.getElementById('style-of-music').value = '';
-        document.querySelector('textarea[placeholder*="Write your own lyrics"]').value = '';
+        setTimeout(() => {
+          button.innerHTML = 'Generate Music';
+          button.disabled = false;
+          document.getElementById('suno-title-music').value = '';
+          document.getElementById('style-of-music').value = '';
+          document.querySelector('textarea[placeholder*="Write your own lyrics"]').value = '';
+        }, 500);
       });
     }
   });
@@ -287,6 +315,12 @@
     outline-offset: 2px;
   }
 
+  .loader-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .loader {
     border: 2px solid transparent;
     border-top: 2px solid white;
@@ -294,6 +328,13 @@
     width: 16px;
     height: 16px;
     animation: spin 1s linear infinite;
+  }
+
+  .progress-text {
+    color: white;
+    font-size: 14px;
+    min-width: 48px;
+    text-align: left;
   }
 
   @keyframes spin {
