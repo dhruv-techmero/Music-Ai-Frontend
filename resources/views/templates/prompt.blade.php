@@ -125,7 +125,7 @@
           'X-CSRF-TOKEN': token
         },
         body: JSON.stringify({
-          gpt_description_prompt: description,
+          gpt_description_prompt: null,
           make_instrumental: false,
           mv: 'chirp-v3-5',
           prompt: 'vocal female'
@@ -149,6 +149,52 @@
         button.innerHTML = 'Generate Music'; // Reset button text
         button.disabled = false; // Re-enable button
         document.querySelector('textarea[placeholder*="Describe the style"]').value = ''; // Clear input
+      });
+    }else{
+      const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+      const url = "{{ env('ROUTE_URL').'website/song/custom-mode' }}";
+      
+      // Get values from custom fields
+      const title = document.getElementById('suno-title-music').value;
+      const tags = document.getElementById('style-of-music').value;
+      const prompt = document.querySelector('textarea[placeholder*="Write your own lyrics"]').value;
+      const isInstrumental = document.getElementById('instrumental').getAttribute('aria-checked') === 'true';
+      
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'X-CSRF-TOKEN': token
+        },
+        body: JSON.stringify({
+          title: title,
+          gpt_description_prompt: null,
+          tags: tags,
+          make_instrumental: isInstrumental,
+          mv: 'chirp-v3-5',
+          prompt: prompt
+        })
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      }).then(data => {
+        loadSongs();
+        const event = new CustomEvent('playSong', { 
+          detail: data.data 
+        });
+        window.dispatchEvent(event);
+      }).catch(error => {
+        console.error('Error:', error);
+      }).finally(() => {
+        // Reset form and button
+        button.innerHTML = 'Generate Music';
+        button.disabled = false;
+        document.getElementById('suno-title-music').value = '';
+        document.getElementById('style-of-music').value = '';
+        document.querySelector('textarea[placeholder*="Write your own lyrics"]').value = '';
       });
     }
   });
