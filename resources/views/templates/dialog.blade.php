@@ -12,7 +12,7 @@
         <span>
           <svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-5 fill-zinc-800" preserveAspectRatio="none">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M513 456.8c-31.1 0-56.4 25.2-56.4 56.4s25.2 56.4 56.4 56.4 56.4-25.3 56.4-56.4c0-31.2-25.2-56.4-56.4-56.4z"></path>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M513 405.3c-59.5 0-107.9 48.4-107.9 107.8 0 59.5 48.4 107.9 107.9 107.9 59.5 0 107.9-48.4 107.9-107.9 0-59.4-48.4-107.8-107.9-107.8z m0 176.7c-38 0-68.8-30.9-68.8-68.8s30.9-68.8 68.8-68.8c38 0 68.8 30.9 68.8 68.8S550.9 582 513 582zM589.6 420.5l188.2-226.7c-14.2-11.8-29.2-22.6-44.9-32.4L576.4 411.2c4.6 2.8 9.1 5.9 13.2 9.3zM436.1 605.5L246.5 831c14.3 12 29.4 23 45.2 33l157.4-249.1c-4.5-2.8-8.9-5.9-13-9.4z"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M513 405.3c-59.5 0-107.9 48.4-107.9 107.8 0 59.5 48.4 107.9 107.9 107.9 59.5 0 107.9-48.4 107.9-107.8 0-59.4-48.4-107.8-107.9-107.8z m0 176.7c-38 0-68.8-30.9-68.8-68.8s30.9-68.8 68.8-68.8c38 0 68.8 30.9 68.8 68.8S550.9 582 513 582zM589.6 420.5l188.2-226.7c-14.2-11.8-29.2-22.6-44.9-32.4L576.4 411.2c4.6 2.8 9.1 5.9 13.2 9.3zM436.1 605.5L246.5 831c14.3 12 29.4 23 45.2 33l157.4-249.1c-4.5-2.8-8.9-5.9-13-9.4z"></path>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M392.7 513.2c0-66.3 53.9-120.3 120.3-120.3 19.7 0 38.3 4.8 54.7 13.3l132-263.5C643.5 114.3 580.1 98.2 513 98.2c-228.8 0-415 186.2-415 415 0 50.1 8.9 98.2 25.3 142.8l276.9-101.3c-4.7-13-7.5-26.9-7.5-41.5zM903.2 372l-277.6 99.5c4.8 13 7.6 27 7.6 41.7 0 66.3-54 120.3-120.3 120.3-19.9 0-38.6-4.9-55.2-13.5l-135 261.9c57 29.6 121.7 46.4 190.2 46.4 228.8 0 415-186.2 415-415 0.1-49.7-8.6-97.2-24.7-141.3z"></path>
           </svg>
         </span> AI Song Generator
@@ -95,7 +95,7 @@
           </div>
           <div class="w-full flex flex-col items-start space-y-2 hidden drawer-custom-fields">
             <div class="w-full flex flex-col items-start gap-2">
-              <label class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm px-2 inline-flex items-center gap-1 text-gray-600" for="Lyrics">Lyrics <span type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rc:" data-state="closed">
+              <label for="Lyrics" class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm px-2 inline-flex items-center gap-1 text-gray-600">Lyrics <span type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:rc:" data-state="closed">
                   <span>
                     <svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-5 fill-gray-300" preserveAspectRatio="none">
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M512 77C271.8 77 77 271.8 77 512s194.8 435 435 435 435-194.8 435-435S752.2 77 512 77z m-2.8 739.4c-35.4 0-64.2-28.2-64.2-62.9s28.7-62.9 64.2-62.9c35.4 0 64.2 28.2 64.2 62.9s-28.7 62.9-64.2 62.9z m172.4-355.9c-12.6 19.8-39.3 46.7-80.3 80.8-21.2 17.6-34.4 31.8-39.5 42.6-5.1 10.7-7.5 29.9-7 57.6h-91.4c-0.2-13.1-0.4-21.1-0.4-24 0-29.6 4.9-53.9 14.7-73 9.8-19.1 29.4-40.6 58.7-64.4 29.3-23.9 46.9-39.5 52.6-46.9 8.8-11.7 13.3-24.6 13.3-38.6 0-19.5-7.9-36.2-23.5-50.2-15.6-13.9-36.8-20.9-63.3-20.9-25.6 0-47 7.3-64.2 21.8-17.2 14.5-32 46.5-35.5 66.3-3.3 18.7-93.4 26.6-92.3-11.3 1.1-37.9 20.8-79 54.6-108.8 33.8-29.8 78.2-44.7 133.1-44.7 57.8 0 103.7 15.1 137.9 45.3 34.2 30.2 51.2 65.3 51.2 105.4 0.1 22.2-6.2 43.2-18.7 63z"></path>
@@ -112,11 +112,28 @@
         </div>
       </div>
       <div class="mt-auto flex flex-col gap-2 p-4">
-        <button  id="" aria-label="Create" class="generate-music-btnw-full p-3 text-white rounded-lg font-medium bg-fuchsia-500 transition duration-500 hover:bg-fuchsia-600 flex items-center justify-center gap-1" fdprocessedid="71wl1" type="button"> Generate Music <span>
-            <svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-4 h-4 fill-white" preserveAspectRatio="none">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M839.8 64c-70.71 0.78-169.12 46.32-236.88 69.2-46.6 15.73-92.32 38.38-140.56 48.83-41.74 9-82.08 5-123.85 10.9-15 2.13-24.41 19.25-25 32.85-3 68.09 14.54 140.18 26.67 207.8-2.68 49.21-6.9 98.4-14.56 148-5.5 35.65-11.13 70.83-4.43 103.84a381.35 381.35 0 0 0-62.92 11.39c-57.61 15.4-117.48 38.31-140.19 98.42-6.42 17-8.07 32.75-6.44 47.32 2.9 53.95 43.24 104.38 108.7 114.9 105.45 16.95 259.74-52.53 251-175.55-3.38-47.39-27.07-73.67-59.35-86.8 9.16-46.45-2.33-115-4.16-139.08-3.87-51-13.07-104.6-20.15-158.29 146.72-2.09 286.82-89.37 430.54-106.87a44 44 0 0 0 10.11-2.53c-8.75 111.27-7.82 233.35-31.33 341.9a160.55 160.55 0 0 1-16.33-1.81c-14.2-2.2-27.69-1.59-42-0.74-36.26 2.16-74.24 11.55-105.32 30.69-112.76 69.42-75.56 228.92 55.54 241.35s220.56-105.33 165.8-211.06c21.71-27.3 16.61-107.71 19-128.68 10-87.75 16-175.91 23.39-263.92C902.63 229.7 952.84 62.76 839.8 64zM701.17 834.71q-68.95-137.57 37.44-134.85a179.65 179.65 0 0 1 50 2.7c8.58 13.74 16 28.09 21.33 43.65q-23.52 86.18-108.77 88.5z m-300.66-67.25c7.3 0.55 12.1-3.06 14.94-8 22.54 38.86-9.6 94.7-43.3 115.37-22.86 14-54 25.82-84.36 32.12 7.32-17.88 13.4-36.18 17.23-55.18 0.78-3.88-5.15-5.56-6-1.65a262.52 262.52 0 0 1-19.73 58.48 199.25 199.25 0 0 1-35.72 3.26 109.82 109.82 0 0 1-21.86-2.67c0.24-46 33.64-90.91 52.21-130.84 2.53-5.43-5.55-10.2-8.09-4.73-19.42 41.77-52.93 84.92-56.31 132.32-0.64-0.21-1.35-0.3-2-0.53 3.81-9.12 2.2-20-9.6-26.5-1.46-0.81-2.6-1.68-4-2.51 8-38.4 23.13-77.56 47.27-107.64 3.89-4.84-2.6-11.76-7-7-25.15 27.39-44.37 67.49-52.4 106-45.32-37.88-7.9-89.13 45.1-109.74a375 375 0 0 1 38.83-12.42 10.07 10.07 0 0 0 6.17 2.59c17.54 1.15 34.08 6.33 51 10.42a2.86 2.86 0 0 0 2.58 3.72l9.64 0.44a4.69 4.69 0 0 0 3-0.93c20.65 3.57 41.62 4.04 62.4 5.62z m435.88-540.29c-6.91-4.54-16-6.66-27.42-4.33-146.11 30-277.25 119.28-425 145.17-4.18-37.26-6.65-74.37-4.8-110.52 34-1.4 67.12-0.32 101.54-9 59.74-15.15 116.45-41.42 175.19-59.85 31.27-9.81 147.7-63.62 175.59-51.51 14.64 6.34 10.39 51.75 4.9 90.04z"></path>
-            </svg>
+        <style>
+          .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          }
+          .progress-text {
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+          }
+        </style>
+        <button  id="" aria-label="Create" class="generate-music-btnw-full p-3 text-white rounded-lg font-medium bg-fuchsia-500 transition duration-500 hover:bg-fuchsia-600 flex items-center justify-center gap-1" fdprocessedid="71wl1" type="button">
+          <div class="progress-container">
+            <span class="button-content">Generate Music <span>
+              <!-- <svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-4 h-4 fill-white" preserveAspectRatio="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M839.8 64c-70.71 0.78-169.12 46.32-236.88 69.2-46.6 15.73-92.32 38.38-140.56 48.83-41.74 9-82.08 5-123.85 10.9-15 2.13-24.41 19.25-25 32.85-3 68.09 14.54 140.18 26.67 207.8-2.68 49.21-6.9 98.4-14.56 148-5.5 35.65-11.13 70.83-4.43 103.84a381.35 381.35 0 0 0-62.92 11.39c-57.61 15.4-117.48 38.31-140.19 98.42-6.42 17-8.07 32.75-6.44 47.32 2.9 53.95 43.24 104.38 108.7 114.9 105.45 16.95 259.74-52.53 251-175.55-3.38-47.39-27.07-73.67-59.35-86.8 9.16-46.45-2.33-115-4.16-139.08-3.87-51-13.07-104.6-20.15-158.29 146.72-2.09 286.82-89.37 430.54-106.87a44 44 0 0 0 10.11-2.53c-8.75 111.27-7.82 233.35-31.33 341.9a160.55 160.55 0 0 1-16.33-1.81c-14.2-2.2-27.69-1.59-42-0.74-36.26 2.16-74.24 11.55-105.32 30.69-112.76 69.42-75.56 228.92 55.54 241.35s220.56-105.33 165.8-211.06c21.71-27.3 16.61-107.71 19-128.68 10-87.75 16-175.91 23.39-263.92C902.63 229.7 952.84 62.76 839.8 64zM701.17 834.71q-68.95-137.57 37.44-134.85a179.65 179.65 0 0 1 50 2.7c8.58 13.74 16 28.09 21.33 43.65q-23.52 86.18-108.77 88.5z m-300.66-67.25c7.3 0.55 12.1-3.06 14.94-8 22.54 38.86-9.6 94.7-43.3 115.37-22.86 14-54 25.82-84.36 32.12 7.32-17.88 13.4-36.18 17.23-55.18 0.78-3.88-5.15-5.56-6-1.65a262.52 262.52 0 0 1-19.73 58.48 199.25 199.25 0 0 1-35.72 3.26 109.82 109.82 0 0 1-21.86-2.67c0.24-46 33.64-90.91 52.21-130.84 2.53-5.43-5.55-10.2-8.09-4.73-19.42 41.77-52.93 84.92-56.31 132.32-0.64-0.21-1.35-0.3-2-0.53 3.81-9.12 2.2-20-9.6-26.5-1.46-0.81-2.6-1.68-4-2.51 8-38.4 23.13-77.56 47.27-107.64 3.89-4.84-2.6-11.76-7-7-25.15 27.39-44.37 67.49-52.4 106-45.32-37.88-7.9-89.13 45.1-109.74a375 375 0 0 1 38.83-12.42 10.07 10.07 0 0 0 6.17 2.59c17.54 1.15 34.08 6.33 51 10.42a2.86 2.86 0 0 0 2.58 3.72l9.64 0.44a4.69 4.69 0 0 0 3-0.93c20.65 3.57 41.62 4.04 62.4 5.62z m435.88-540.29c-6.91-4.54-16-6.66-27.42-4.33-146.11 30-277.25 119.28-425 145.17-4.18-37.26-6.65-74.37-4.8-110.52 34-1.4 67.12-0.32 101.54-9 59.74-15.15 116.45-41.42 175.19-59.85 31.27-9.81 147.7-63.62 175.59-51.51 14.64 6.34 10.39 51.75 4.9 90.04z"></path>
+              </svg> -->
+            </span>
           </span>
+            <span class="progress-text hidden">0%</span>
+          </div>
         </button>
       </div>
     </div>
@@ -124,6 +141,8 @@
 </div>
 <script>
   $(document).ready(function() {
+    let progress = 0;
+    let progressInterval;
     // Close Drawer Function
     function closeDrawer() {
       $('#drawer').addClass('hidden');
@@ -171,15 +190,65 @@
     // Generate Music Button
     $('.generate-music-btnw-full').on('click', function() {
       const $button = $(this);
-      // Show loader
-      $button.html('<span class="loader"></span>');
+      progress = 0;
+      
+      // Show loader and progress
+      $button.find('.button-content').addClass('hidden');
+      $button.find('.progress-text').removeClass('hidden').text('0%');
       $button.prop('disabled', true);
 
+      // Clear any existing interval
+      if (progressInterval) {
+        clearInterval(progressInterval);
+      }
+
+      // Initialize progress stages with more granular steps
+      const stages = {
+        preparing: { start: 0, end: 25, increment: 0.8 },
+        generating: { start: 25, end: 55, increment: 0.6 },
+        processing: { start: 55, end: 85, increment: 0.5 },
+        finalizing: { start: 85, end: 95, increment: 0.3 }
+      };
+      
+      let currentStage = 'preparing';
+      let stageProgress = 0;
+
+      progressInterval = setInterval(() => {
+        const stage = stages[currentStage];
+        if (progress < stage.end) {
+          // Use consistent increments for smoother progress
+          const increment = stage.increment;
+          progress += increment;
+          progress = Math.min(progress, stage.end);
+          const roundedProgress = Math.round(progress);
+          
+          // Update both dialog and prompt progress
+          $button.find('.progress-text').text(`${roundedProgress}%`);
+          window.dispatchEvent(new CustomEvent('updateProgress', { 
+            detail: { progress: roundedProgress }
+          }));
+          
+          // Move to next stage with smoother transitions
+          if (progress >= stage.end) {
+            switch (currentStage) {
+              case 'preparing':
+                currentStage = 'generating';
+                break;
+              case 'generating':
+                currentStage = 'processing';
+                break;
+              case 'processing':
+                currentStage = 'finalizing';
+                break;
+            }
+          }
+        }
+      }, 100); // More frequent updates for smoother progress
+
       const description = $('.dialog-description').val();
-      // alert(description);
       const isCustomMode = $('#drawer-custom-mode').attr('aria-checked') === 'true';
       const isInstrumental = $('#instrumental').attr('aria-checked') === 'true';
-      console.log(description);
+      
       if (!isCustomMode) {
         const token = $('meta[name="csrf-token"]').attr('content');
         
@@ -198,24 +267,45 @@
             prompt: 'vocal female'
           }),
           success: function(data) {
-            // Trigger song loading and playback
-            loadSongs(); // Assuming this function exists
-            window.dispatchEvent(new CustomEvent('playSong', { 
-              detail: data.data 
+            clearInterval(progressInterval);
+            progress = 100;
+            const finalProgress = 100;
+            
+            // Update both dialog and prompt progress to 100%
+            $button.find('.progress-text').text(`${finalProgress}%`);
+            window.dispatchEvent(new CustomEvent('updateProgress', { 
+              detail: { progress: finalProgress }
             }));
-
-            // Close the drawer after successful generation
-            closeDrawer();
+            
+            setTimeout(() => {
+              // Trigger song loading and playback
+              loadSongs();
+              window.dispatchEvent(new CustomEvent('playSong', { 
+                detail: data.data 
+              }));
+              closeDrawer();
+            }, 500);
           },
           error: function(xhr, status, error) {
+            clearInterval(progressInterval);
             console.error('Error:', error);
-            // Optionally show an error message
             alert('Failed to generate music. Please try again.');
+            
+            // Reset progress on both dialog and prompt
+            progress = 0;
+            $button.find('.progress-text').addClass('hidden');
+            $button.find('.button-content').removeClass('hidden');
+            $button.prop('disabled', false);
+            window.dispatchEvent(new CustomEvent('updateProgress', { 
+              detail: { progress: 0 }
+            }));
           },
           complete: function() {
-            // Reset button
-            $button.html('Generate Music');
-            $button.prop('disabled', false);
+            setTimeout(() => {
+              $button.find('.progress-text').addClass('hidden');
+              $button.find('.button-content').removeClass('hidden');
+              $button.prop('disabled', false);
+            }, 500);
             $('textarea[placeholder*="Describe the style of music"]').val('');
           }
         });
@@ -274,8 +364,14 @@
           })
           .finally(() => {
               // Reset button
-              $button.html('Generate Music <span><svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-4 h-4 fill-white" preserveAspectRatio="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M839.8 64c-70.71 0.78-169.12 46.32-236.88 69.2-46.6 15.73-92.32 38.38-140.56 48.83-41.74 9-82.08 5-123.85 10.9-15 2.13-24.41 19.25-25 32.85-3 68.09 14.54 140.18 26.67 207.8-2.68 49.21-6.9 98.4-14.56 148-5.5 35.65-11.13 70.83-4.43 103.84a381.35 381.35 0 0 0-62.92 11.39c-57.61 15.4-117.48 38.31-140.19 98.42-6.42 17-8.07 32.75-6.44 47.32 2.9 53.95 43.24 104.38 108.7 114.9 105.45 16.95 259.74-52.53 251-175.55-3.38-47.39-27.07-73.67-59.35-86.8 9.16-46.45-2.33-115-4.16-139.08-3.87-51-13.07-104.6-20.15-158.29 146.72-2.09 286.82-89.37 430.54-106.87a44 44 0 0 0 10.11-2.53c-8.75 111.27-7.82 233.35-31.33 341.9a160.55 160.55 0 0 1-16.33-1.81c-14.2-2.2-27.69-1.59-42-0.74-36.26 2.16-74.24 11.55-105.32 30.69-112.76 69.42-75.56 228.92 55.54 241.35s220.56-105.33 165.8-211.06c21.71-27.3 16.61-107.71 19-128.68 10-87.75 16-175.91 23.39-263.92C902.63 229.7 952.84 62.76 839.8 64zM701.17 834.71q-68.95-137.57 37.44-134.85a179.65 179.65 0 0 1 50 2.7c8.58 13.74 16 28.09 21.33 43.65q-23.52 86.18-108.77 88.5z m-300.66-67.25c7.3 0.55 12.1-3.06 14.94-8 22.54 38.86-9.6 94.7-43.3 115.37-22.86 14-54 25.82-84.36 32.12 7.32-17.88 13.4-36.18 17.23-55.18 0.78-3.88-5.15-5.56-6-1.65a262.52 262.52 0 0 1-19.73 58.48 199.25 199.25 0 0 1-35.72 3.26 109.82 109.82 0 0 1-21.86-2.67c0.24-46 33.64-90.91 52.21-130.84 2.53-5.43-5.55-10.2-8.09-4.73-19.42 41.77-52.93 84.92-56.31 132.32-0.64-0.21-1.35-0.3-2-0.53 3.81-9.12 2.2-20-9.6-26.5-1.46-0.81-2.6-1.68-4-2.51 8-38.4 23.13-77.56 47.27-107.64 3.89-4.84-2.6-11.76-7-7-25.15 27.39-44.37 67.49-52.4 106-45.32-37.88-7.9-89.13 45.1-109.74a375 375 0 0 1 38.83-12.42 10.07 10.07 0 0 0 6.17 2.59c17.54 1.15 34.08 6.33 51 10.42a2.86 2.86 0 0 0 2.58 3.72l9.64 0.44a4.69 4.69 0 0 0 3-0.93c20.65 3.57 41.62 4.04 62.4 5.62z m435.88-540.29c-6.91-4.54-16-6.66-27.42-4.33-146.11 30-277.25 119.28-425 145.17-4.18-37.26-6.65-74.37-4.8-110.52 34-1.4 67.12-0.32 101.54-9 59.74-15.15 116.45-41.42 175.19-59.85 31.27-9.81 147.7-63.62 175.59-51.51 14.64 6.34 10.39 51.75 4.9 90.04z"></path></svg></span>');
-              $button.prop('disabled', false);
+              clearInterval(progressInterval);
+              progress = 100;
+              $button.find('.progress-text').text('100%');
+              setTimeout(() => {
+                $button.find('.progress-text').addClass('hidden');
+                $button.find('.button-content').removeClass('hidden');
+                $button.prop('disabled', false);
+              }, 500);
           });
       }
       // }
