@@ -230,7 +230,7 @@ $(document).ready(function() {
         updateSongUI(songId, true);
         
         $.ajax({
-            url: `${url}/website/song/?song_id=${songId}`,
+            url: `${url}website/song/play/${songId}`,
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
