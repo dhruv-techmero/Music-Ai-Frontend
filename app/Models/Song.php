@@ -253,4 +253,81 @@ class Song extends Model
             }
         });
     }
+
+    public function likes()
+{
+    return $this->hasMany(Like::class, 'song_id');
+}
+
+public function isLikedByUser($userId)
+{
+    return $this->likes()->where('user_id', $userId)->exists();
+}
+
+
+
+
+
+
+
+
+public static function updateLyrics()
+{
+    $musicWithoutMp3Url = self::
+    whereNull('lyrics')
+        ->get();
+
+    foreach ($musicWithoutMp3Url as $audio) {
+        try {
+            // Get token
+            $response = Http::get('https://suno-v2.chataiappgpt.workers.dev/token', [
+                'au' => null
+            ]);
+            
+            if ($response->successful()) {
+                $tokenData = $response->json();
+                $token = $tokenData['jwt'] ?? null;
+
+                if ($token) {
+                    $response = Http::withHeaders([
+                        'Accept-Encoding' => 'gzip, deflate',
+                        'Authorization' => 'Bearer ' . $token,
+                        'Content-Type' => 'application/json',
+                    ])
+                    ->get('https://suno-v2.chataiappgpt.workers.dev/feed', [
+                        'ids' => $audio->song_id
+                    ]);
+        
+                    if ($response->successful()) {
+                        $responseData = $response->json();
+                        
+                        // Check if clips exist and have data
+                        if (!empty($responseData['clips']) && isset($responseData['clips'][0])) {
+                            $clip = $responseData['clips'][0];
+                            // dd($clip['metadata']);
+                            $updateData = [
+                                'lyrics' => $clip['metadata'] ['prompt'] ?? $audio->prompt,
+                            ];
+
+                            // Update the audio record
+                            $audio->update($updateData);
+
+                            \Log::info("Updated song {$audio->song_id} with new URLs and metadata");
+                        } else {
+                            \Log::warning("No clips found for song ID: {$audio->song_id}");
+                        }
+                    } else {
+                        \Log::error("Failed to fetch feed for song ID: {$audio->song_id}, Status: " . $response->status());
+                    }
+                } else {
+                    \Log::warning("No JWT token found for song ID: {$audio->song_id}");
+                }
+            } else {
+                \Log::error("Failed to get token for song ID: {$audio->song_id}, Status: {$response->status()}");
+            }
+        } catch (\Exception $e) {
+            \Log::error("Exception in updateMp3 for song ID {$audio->song_id}: " . $e->getMessage());
+        }
+    }
+}
 }

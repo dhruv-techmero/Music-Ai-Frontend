@@ -8,6 +8,7 @@ use App\Http\Controllers\Website\SongController;
 use App\Models\SunoAiSong;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AICompositionController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,6 @@ Route::get('/{provider}/callback', [AuthController::class, 'handleProviderCallba
     ->name('social.auth.callback');
 
 
-
 Route::group(['prefix' => 'website'], function() {
     Route::get('logout',[AuthController::class,'logout'])->name('logout');
    
@@ -49,6 +49,11 @@ Route::group(['prefix' => 'website'], function() {
             Route::get('generate-song','songPage')->name('song-generate-view');
             
         });
+        
+        // Like Routes
+        Route::post('/like/{song}', [LikeController::class, 'like'])->name('like.song');
+        Route::delete('/like/{song}', [LikeController::class, 'unlike'])->name('unlike.song');
+        Route::get('playlist',[HomeController::class,'playlist'])->name('playlist');
     });
     
     });

@@ -44,8 +44,8 @@
                   </button>
                 </label>
                 <div class="w-full px-2 py-1 rounded-md border border-gray-500/20 bg-white/10 relative">
-                  <textarea id="style-of-music" placeholder="Enter style of music" class="w-full h-40 p-1 bg-transparent border-none text-sm text-white outline-none resize-none overflow-y-auto disabled:cursor-not-allowed disabled:text-gray-1000 disabled:ring-gray-200"></textarea>
-                  <div class="absolute bottom-14 right-2 text-xs text-gray-400 text-right"> 0/120 </div>
+                  <textarea id="style-of-music" maxlength="120" placeholder="Enter style of music" class="w-full h-40 p-1 bg-transparent border-none text-sm text-white outline-none resize-none overflow-y-auto disabled:cursor-not-allowed disabled:text-gray-1000 disabled:ring-gray-200"></textarea>
+                  <div id="char-counter" class="absolute bottom-14 right-2 text-xs text-gray-400 text-right">0/120</div>
                   <div class="absolute bottom-2 left-2 max-w-full overflow-x-auto whitespace-nowrap">
                     <div class="pb-1 flex space-x-1 overflow-x-auto mr-4">
                       <button class="font-sans text-white text-xs rounded-full px-3 py-1.5 bg-gray-400/20">ethereal</button>
@@ -279,6 +279,19 @@
       textarea.setSelectionRange(newPosition, newPosition);
       // Focus back on textarea
       textarea.focus();
+    });
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    const textarea = document.getElementById('style-of-music');
+    const charCounter = document.getElementById('char-counter');
+    
+    textarea.addEventListener('input', function() {
+      const length = this.value.length;
+      charCounter.textContent = `${length}/120`;
+      
+      if (length >= 120) {
+        this.value = this.value.slice(0, 120);
+      }
     });
   });
 </script>
