@@ -1,4 +1,7 @@
 <!-- <div id="songContainer" style="height: 600px;"></div> -->
+@extends('templates.layout')
+@section('title', 'Song')
+@section('content')
 <style>
     #songContainer {
         height: 600px;
@@ -58,10 +61,11 @@ const songTemplate = `
             <p class="w-8 h-8 rounded-lg bg-black/40 hover:bg-fuchsia-600 inline-flex items-center justify-center cursor-pointer transform duration-500" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:r6:" data-state="closed">
               <span>
                 <svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-4 fill-white" preserveAspectRatio="none">
-                  <path fill="evenodd" clip-rule="evenodd" d="M214.016 200.192c-12.288-11.776-32.256-11.776-44.544 0-12.288 11.776-12.288 30.72 0 42.496l44.544 42.496c12.288 11.776 32.256 11.776 44.544 0 12.288-11.776 12.288-30.72 0-42.496l-44.544-42.496C315.392 86.826667 170.666667 168.746667 170.666667 301.44V640a42.666667 42.666667 0 1 0 85.333333 0V301.44C256 235.093333 328.362667 194.133333 385.237333 228.266667z m595.968 0l-44.544 42.496c-12.288 11.776-12.288 30.72 0 42.496 12.288 11.776 32.256 11.776 44.544 0l44.544-42.496c12.288-11.776 12.288-30.72 0-42.496-12.288-11.776-32.256-11.776-44.544 0zM135.168 437.248H72.704c-17.408 0-31.232 13.312-31.232 29.696 0 16.384 13.824 30.208 31.232 30.208h62.976c17.408 0 31.232-13.312 31.232-30.208 0-16.384-14.336-29.696-31.744-29.696z m816.128 0h-62.976c-17.408 0-31.232 13.312-31.232 29.696 0 16.384 13.824 30.208 31.232 30.208h62.976c17.408 0 31.232-13.312 31.232-30.208 0-16.384-13.824-29.696-31.232-29.696zM480.768 92.672v59.904c0 16.384 13.824 29.696 31.232 29.696 17.408 0 31.232-13.312 31.232-29.696V92.672c0-16.384-13.824-29.696-31.232-29.696-17.408-0.512-31.232 13.312-31.232 29.696zM229.376 512c0 148.992 126.464 269.824 282.624 269.824s282.624-120.832 282.624-269.824-126.464-269.824-282.624-269.824S229.376 363.008 229.376 512z m219.648 419.328c0 16.384 13.824 30.208 31.232 30.208h62.976c17.408 0 31.232-13.312 31.232-30.208 0-16.384-13.824-30.208-31.232-30.208H480.768c-17.408 0.512-31.744 13.824-31.744 30.208z m-62.464-89.6c0 16.384 13.824 30.208 31.232 30.208h188.416c17.408 0 31.232-13.312 31.232-30.208 0-16.384-13.824-30.208-31.232-30.208H417.792c-17.408 0-31.232 13.312-31.232 30.208z"></path>
-                </svg>
-              </span>
-            </p>
+                  <path fill="evenodd" clip-rule="evenodd" d="M214.016 200.192c-12.288-11.776-32.256-11.776-44.544 0-12.288 11.776-12.288 30.72 0 42.496l44.544 42.496c12.288 11.776 32.256 11.776 44.544 0 12.288-11.776 12.288-30.72 0-42.496l-44.544-42.496C315.392 86.826667 170.666667 168.746667 170.666667 301.44V640a42.666667 42.666667 0 1 0 85.333333 0V301.44C256 235.093333 328.362667 194.133333 385.237333 228.266667z m595.968 0l-44.544 42.496c-12.288 11.776-12.288 30.72 0 42.496 12.288 11.776 32.256 11.776 44.544 0l44.544-42.496c12.288-11.776 12.288-30.72 0-42.496-12.288-11.776-32.256-11.776-44.544 0zM135.168 437.248H72.704c-17.408 0-31.232 13.312-31.232 29.696 0 16.384 13.824 30.208 31.232 30.208h62.976c17.408 0 31.232-13.312 31.232-30.208 0-16.384-14.336-29.696-31.744-29.696z m816.128 0h-62.976c-17.408 0-31.232 13.312-31.232 29.696 0 16.384 13.824 30.208 31.232 30.208h62.976c17.408 0 31.232-13.312 31.232-30.208 0-16.384-13.824-29.696-31.232-29.696zM480.768 92.672v59.904c0 16.384 13.824 29.696 31.232 29.696 17.408 0 31.232-13.312 31.232-29.696V92.672c0-16.384-13.824-29.696-31.232-29.696-17.408-0.512-31.232 13.312-31.232 29.696zM229.376 512c0 148.992 126.464 269.824 282.624 269.824s282.624-120.832 282.624-269.824-126.464-269.824-282.624-269.824S229.376 363.008 229.376 512z m219.648 419.328c0 16.384 13.824 30.208 31.232 30.208h62.976c17.408 0 31.232-13.312 31.232-30.208 0-16.384-13.824-30.208-31.232-30.208H480.768c-17.408 0.512-31.744 13.824-31.744 30.208z m-62.464-89.6c0 16.384 13.824 30.208 31.232 30.208h188.416c17.408 0 31.232-13.312 31.232-30.208 0-16.384-13.824-30.208-31.232-30.208H417.792c-17.408 0-31.232 13.312-31.232 30.208z m0-.75V21h1.5v-5.25h-1.5Zm6-.75H18v1.5h2.25V15Zm-3 .75V18h1.5v-2.25h-1.5Zm.75 3h1.5v-1.5H18v1.5Zm1.5 1.5H18v1.5h1.5v-1.5Zm.75-.75a.75.75 0 0 1-.75.75v1.5a2.25 2.25 0 0 0 2.25-2.25h-1.5Zm-.75-.75a.75.75 0 0 1 .75.75h1.5a2.25 2.25 0 0 0-2.25-2.25v1.5Z"></path>
+                  </svg>
+                </span>
+              </p>
+            </div>
           </div>
         </div>
         <div class="w-full my-4 mx-auto flex items-center justify-between gap-2">
@@ -79,9 +83,7 @@ const songTemplate = `
               <button aria-label="Rewind" id="rewind" class="rhap_button-clear rhap_main-controls-button rhap_rewind-button" type="button" fdprocessedid="xf6r3s">
                 <span>
                   <svg class="w-6 h-6 fill-gray-100" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.22 11.03a.75.75 0 1 0 1.06-1.06l-1.06 1.06ZM3 6.75l-.53-.53a.75.75 0 0 0 0 1.06L3 6.75Zm4.28-3.22a.75.75 0 0 0-1.06-1.06l1.06 1.06ZM13.5 18a.75.75 0 0 0 0 1.5V18ZM7.28 9.97 3.53 6.22 2.47 7.28l3.75 3.75 1.06-1.06ZM3.53 7.28l3.75-3.75-1.06-1.06-3.75 3.75 1.06 1.06Zm16.72 5.47c0 2.9-2.35 5.25-5.25 5.25v1.5a6.75 6.75 0 0 0 6.75-6.75h-1.5ZM15 7.5c2.9 0 5.25 2.35 5.25 5.25h1.5A6.75 6.75 0 0 0 15 6v1.5ZM15 6H3v1.5h12V6Zm0 12h-1.5v1.5H15V18Z"></path>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3 15.75h.75V21"></path>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9 16.5A.75.75 0 0 0 9 15v1.5Zm-2.25-.75V15a.75.75 0 0 0-.75.75h.75Zm0 2.25H6c0 .414.336.75.75.75V18Zm0 2.25a.75.75 0 0 0 0 1.5v-1.5ZM9 15H6.75v1.5H9V15Zm-3 .75V18h1.5v-2.25H6Zm.75 3h1.5v-1.5h-1.5v1.5Zm1.5 1.5h-1.5v1.5h1.5v-1.5ZM9 19.5a.75.75 0 0 1-.75.75v1.5a2.25 2.25 0 0 0 2.25-2.25H9Zm-.75-.75a.75.75 0 0 1 .75.75h1.5a2.25 2.25 0 0 0-2.25-2.25v1.5Z"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.22 11.03a.75.75 0 1 0 1.06-1.06l-1.06 1.06ZM3 6.75l-.53-.53a.75.75 0 0 0 0 1.06L3 6.75Zm4.28-3.22a.75.75 0 0 0-1.06-1.06l1.06 1.06ZM13.5 18a.75.75 0 0 0 0 1.5V18ZM7.28 9.97 3.53 6.22 2.47 7.28l3.75 3.75 1.06-1.06ZM3.53 7.28l3.75-3.75-1.06-1.06-3.75 3.75 1.06 1.06Zm16.72 5.47c0 2.9-2.35 5.25-5.25 5.25v1.5a6.75 6.75 0 0 0 6.75-6.75h-1.5ZM15 7.5c2.9 0 5.25 2.35 5.25 5.25h1.5A6.75 6.75 0 0 0 15 6v1.5ZM15 6H3v1.5h12V6Zm0 12h-1.5v1.5H15V18Zm5.25-3H15V15h-.75v1.5Zm0-.75V21h1.5v-5.25h-1.5Zm6-.75H18v1.5h2.25V15Zm-3 .75V18h1.5v-2.25h-1.5Zm.75 3h1.5v-1.5H18v1.5Zm1.5 1.5H18v1.5h1.5v-1.5Zm.75-.75a.75.75 0 0 1-.75.75v1.5a2.25 2.25 0 0 0 2.25-2.25h-1.5Zm-.75-.75a.75.75 0 0 1 .75.75h1.5a2.25 2.25 0 0 0-2.25-2.25v1.5Z"></path>
                   </svg>
                 </span>
               </button>
@@ -95,7 +97,7 @@ const songTemplate = `
               <button aria-label="Forward" id="forward" class="rhap_button-clear rhap_main-controls-button rhap_forward-button" type="button" fdprocessedid="ncdmo8">
                 <span>
                   <svg class="w-6 h-6 fill-gray-100" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.72 9.97a.75.75 0 1 0 1.06 1.06l-1.06-1.06ZM21 6.75l.53.53a.75.75 0 0 0 0-1.06l-.53.53Zm-3.22-4.28a.75.75 0 1 0-1.06 1.06l1.06-1.06ZM10.5 19.5a.75.75 0 0 0 0-1.5v1.5Zm3.75-4.5a.75.75 0 0 0 0 1.5V15Zm.75.75h.75A.75.75 0 0 0 15 15v.75ZM14.25 21a.75.75 0 0 0 1.5 0h-1.5Zm6-4.5a.75.75 0 0 0 0-1.5v1.5ZM18 15.75V15a.75.75 0 0 0-.75.75H18ZM18 18h-.75c0 .414.336.75.75.75V18Zm0 2.25a.75.75 0 0 0 0 1.5v-1.5Zm-.22-9.22 3.75-3.75-1.06-1.06-3.75 3.75 1.06 1.06Zm3.75-4.81-3.75-3.75-1.06 1.06 3.75 3.75 1.06-1.06ZM2.25 12.75A6.75 6.75 0 0 0 9 19.5V18a5.25 5.25 0 0 1-5.25-5.25h-1.5ZM9 6a6.75 6.75 0 0 0-6.75 6.75h1.5C3.75 9.85 6.1 7.5 9 7.5V6Zm0 1.5h12V6H9v1.5Zm0 12h1.5V18H9v1.5Zm5.25-3H15V15h-.75v1.5Zm0-.75V21h1.5v-5.25h-1.5Zm6-.75H18v1.5h2.25V15Zm-3 .75V18h1.5v-2.25h-1.5Zm.75 3h1.5v-1.5H18v1.5Zm1.5 1.5H18v1.5h1.5v-1.5Zm.75-.75a.75.75 0 0 1-.75.75v1.5a2.25 2.25 0 0 0 2.25-2.25h-1.5Zm-.75-.75a.75.75 0 0 1 .75.75h1.5a2.25 2.25 0 0 0-2.25-2.25v1.5Z"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.72 9.97a.75.75 0 1 0 1.06 1.06l-1.06-1.06ZM21 6.75l.53.53a.75.75 0 0 0 0-1.06l-.53.53Zm-3.22-4.28a.75.75 0 1 0-1.06 1.06l1.06-1.06ZM10.5 19.5a.75.75 0 0 0 0-1.5v1.5ZM3.75-4.5a.75.75 0 0 0 0 1.5V15Zm.75.75h.75A.75.75 0 0 0 15 15v.75ZM14.25 21a.75.75 0 0 0 1.5 0h-1.5Zm6-4.5a.75.75 0 0 0 0-1.5v1.5ZM18 15.75V15a.75.75 0 0 0-.75.75H18ZM18 18h-.75c0 .414.336.75.75.75V18Zm0 2.25a.75.75 0 0 0 0 1.5v-1.5Zm-.22-9.22 3.75-3.75-1.06-1.06-3.75 3.75 1.06 1.06Zm3.75-4.81-3.75-3.75-1.06 1.06 3.75 3.75 1.06-1.06ZM2.25 12.75A6.75 6.75 0 0 0 9 19.5V18a5.25 5.25 0 0 1-5.25-5.25h-1.5ZM9 6a6.75 6.75 0 0 0-6.75 6.75h1.5C3.75 9.85 6.1 7.5 9 7.5V6Zm0 1.5h12V6H9v1.5Zm0 12h1.5V18H9v1.5Zm5.25-3H15V15h-.75v1.5Zm0-.75V21h1.5v-5.25h-1.5Zm6-.75H18v1.5h2.25V15Zm-3 .75V18h1.5v-2.25h-1.5Zm.75 3h1.5v-1.5H18v1.5Zm1.5 1.5H18v1.5h1.5v-1.5Zm.75-.75a.75.75 0 0 1-.75.75v1.5a2.25 2.25 0 0 0 2.25-2.25h-1.5Zm-.75-.75a.75.75 0 0 1 .75.75h1.5a2.25 2.25 0 0 0-2.25-2.25v1.5Z"></path>
                   </svg>
                 </span>
               </button>
@@ -114,8 +116,8 @@ const songTemplate = `
             <div class="rhap_volume-container">
               <button aria-label="Mute" type="button" class="rhap_button-clear rhap_volume-button" fdprocessedid="aktpg9">
                 <span>
-                  <svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-4 h-4 lg:w-5 lg:h-5 fill-gray-100" preserveAspectRatio="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M143.36 737.28a81.92 81.92 0 0 1-81.92-81.92V368.64a81.92 81.92 0 0 1 81.92-81.92h163.84l171.6224-148.74624A81.92 81.92 0 0 1 614.4 199.8848v624.2304a81.92 81.92 0 0 1-135.5776 61.91104L307.2 737.28H143.36z m684.83072-515.4816A358.07232 358.07232 0 0 1 962.56 501.76a358.07232 358.07232 0 0 1-134.36928 279.9616 30.72 30.72 0 0 1-38.46144-47.9232 296.63232 296.63232 0 0 0 111.4112-232.0384c0-91.40224-41.472-175.9232-111.4112-232.0384a30.72 30.72 0 1 1 38.46144-47.9232z m-114.9952 121.18016C772.7104 382.09536 808.96 444.14976 808.96 512c0 67.85024-36.2496 129.90464-95.76448 169.02144a30.72 30.72 0 1 1-33.75104-51.32288C722.3296 601.4976 747.52 558.32576 747.52 512s-25.21088-89.51808-68.07552-117.69856a30.72 30.72 0 1 1 33.75104-51.32288z"></path>
+                  <svg aria-hidden="true" viewBox="0 0 24 24" class="w-4 h-4 lg:w-5 lg:h-5 fill-gray-100">
+                    <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
                   </svg>
                 </span>
               </button>
@@ -138,7 +140,7 @@ const songTemplate = `
       <div class="px-2 py-1 hover:text-emerald-500 cursor-pointer transition duration-300 group inline-flex items-center justify-center gap-2">
         <span>
           <svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-5 transition duration-300 fill-white group-hover:fill-[#d946ef]" preserveAspectRatio="none">
-            <path d="M874.666667 544c-17.066667 0-32 14.933333-32 32v256c0 6.4-4.266667 10.666667-10.666667 10.666667H192c-6.4 0-10.666667-4.266667-10.666667-10.666667V192c0-6.4 4.266667-10.666667 10.666667-10.666667h256c17.066667 0 32-14.933333 32-32s-14.933333-32-32-32H192C151.466667 117.333333 117.333333 151.466667 117.333333 192v640c0 40.533333 34.133333 74.666667 74.666667 74.666667h640c40.533333 0 74.666667-34.133333 74.666667-74.666667V576c0-17.066667-14.933333-32-32-32z m256 0v768h-64V544z m-4.8-3.2h-64v-64h64v64z"></path>
+            <path d="M874.666667 544c-17.066667 0-32 14.933333-32 32v256c0 6.4-4.266667 10.666667-10.666667 10.666667H192c-6.4 0-10.666667-4.266667-10.666667-10.666667V192c0-6.4 4.266667-10.666667 10.666667-10.666667h256c17.066667 0 32-14.933333 32-32s-14.933333-32-32-32H192C151.466667 117.333333 117.333333 151.466667 117.333333 192v640c0 40.533333 34.133333 74.666667 74.666667 74.666667h640c40.533333 0 74.666667-34.133333 74.666667-74.666667V576c0-17.066667-14.336-29.696-31.744-29.696z m256 0v768h-64V544z m-4.8-3.2h-64v-64h64v64z"></path>
             <path d="M512 128v768h-64V128h64z m256 0v768h-64V128h64z"></path>
           </svg>
         </span>
@@ -258,6 +260,23 @@ window.addEventListener('playSong', function(event) {
         const forward = document.querySelector('#forward');
         const rewind = document.querySelector('#rewind');
 
+        // Create tooltip element
+        const tooltip = document.createElement('div');
+        tooltip.style.cssText = `
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            display: none;
+            z-index: 1000;
+            transform: translateX(-50%) translateY(-100%);
+            margin-top: -8px;
+        `;
+        progressContainer.appendChild(tooltip);
+
         // Update progress bar and time displays
         audioElement.addEventListener('timeupdate', () => {
             const progress = (audioElement.currentTime / audioElement.duration) * 100;
@@ -267,6 +286,22 @@ window.addEventListener('playSong', function(event) {
             // Update time displays
             currentTimeDisplay.textContent = formatTime(audioElement.currentTime);
             totalTimeDisplay.textContent = formatTime(audioElement.duration);
+        });
+
+        // Mouse move handler for progress bar
+        progressContainer.addEventListener('mousemove', (e) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            const timeAtPosition = pos * audioElement.duration;
+            
+            tooltip.style.display = 'block';
+            tooltip.style.left = `${e.clientX - rect.left}px`;
+            tooltip.textContent = formatTime(timeAtPosition);
+        });
+
+        // Hide tooltip when mouse leaves progress bar
+        progressContainer.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
         });
 
         // Click handling for progress bar
@@ -319,13 +354,10 @@ window.addEventListener('playSong', function(event) {
             const volume = audioElement.volume;
             volumeButton.innerHTML = `
                 <span>
-                    <svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-4 h-4 lg:w-5 lg:h-5 fill-gray-100" preserveAspectRatio="none">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" class="w-4 h-4 lg:w-5 lg:h-5 fill-gray-100">
                         ${volume === 0 ? 
-                            // Muted icon
-                            '<path d="M512 128v768h-64V128h64z m256 0v768h-64V128h64z"></path>' :
-                            // Volume icon (existing path)
-                            '<path fill-rule="evenodd" clip-rule="evenodd" d="M143.36 737.28a81.92 81.92 0 0 1-81.92-81.92V368.64a81.92 81.92 0 0 1 81.92-81.92h163.84l171.6224-148.74624A81.92 81.92 0 0 1 614.4 199.8848v624.2304a81.92 81.92 0 0 1-135.5776 61.91104L307.2 737.28H143.36z m684.83072-515.4816A358.07232 358.07232 0 0 1 962.56 501.76a358.07232 358.07232 0 0 1-134.36928 279.9616 30.72 30.72 0 0 1-38.46144-47.9232 296.63232 296.63232 0 0 0 111.4112-232.0384c0-91.40224-41.472-175.9232-111.4112-232.0384a30.72 30.72 0 1 1 38.46144-47.9232z m-114.9952 121.18016C772.7104 382.09536 808.96 444.14976 808.96 512c0 67.85024-36.2496 129.90464-95.76448 169.02144a30.72 30.72 0 1 1-33.75104-51.32288C722.3296 601.4976 747.52 558.32576 747.52 512s-25.21088-89.51808-68.07552-117.69856a30.72 30.72 0 1 1 33.75104-51.32288z"></path>'
-                        }
+                            '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>' :
+                            '<path d="M3 9v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>'}
                     </svg>
                 </span>
             `;
@@ -351,21 +383,40 @@ window.addEventListener('playSong', function(event) {
 
     // Add download functionality
     const downloadButton = document.querySelector('.group svg[viewBox="0 0 1077 1024"]').closest('.group');
-    downloadButton.addEventListener('click', function() {
+    downloadButton.addEventListener('click', async function() {
         if (currentlyPlayingSongId) {
             const audioElement = document.querySelector('audio');
             if (audioElement && audioElement.src) {
-                // Create a temporary anchor element
-                const downloadLink = document.createElement('a');
-                downloadLink.href = audioElement.src;
-                downloadLink.download = `song_${currentlyPlayingSongId}.mp3`; // Set the download filename
-                
-                // Trigger the download
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
+                try {
+                    // Show loading state
+                    downloadButton.style.opacity = '0.5';
+                    downloadButton.style.pointerEvents = 'none';
+                    
+                    // Fetch the audio file
+                    const response = await fetch(audioElement.src);
+                    const blob = await response.blob();
+                    
+                    // Create a blob URL and trigger download
+                    const blobUrl = window.URL.createObjectURL(blob);
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = blobUrl;
+                    downloadLink.download = `song_${currentlyPlayingSongId}.mp3`;
+                    
+                    // Trigger download and cleanup
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                    window.URL.revokeObjectURL(blobUrl);
+                } catch (error) {
+                    console.error('Download failed:', error);
+                } finally {
+                    // Reset button state
+                    downloadButton.style.opacity = '1';
+                    downloadButton.style.pointerEvents = 'auto';
+                }
             }
         }
     });
 });
 </script>
+@endsection

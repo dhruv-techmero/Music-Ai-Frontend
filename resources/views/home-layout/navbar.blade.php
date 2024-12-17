@@ -7,7 +7,7 @@
           <span class="font-bold text-base sm:text-lg">Music</span> AI </span>
       </a>
       <div class="hidden lg:flex lg:gap-x-8">
-        <a class="text-sm font-semibold leading-6 text-gray-100 transition duration-200 hover:text-fuchsia-500" href="/">Home</a>
+        <a class="text-sm font-semibold leading-6 text-gray-100 transition duration-200 hover:text-fuchsia-500" href="{{ route('home') }}">Home</a>
       </div>
       <div hidden="" style="position:fixed;top:1px;left:1px;width:1px;height:0;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border-width:0;display:none"></div>
     </div>

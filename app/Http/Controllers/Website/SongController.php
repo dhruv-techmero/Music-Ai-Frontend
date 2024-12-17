@@ -27,7 +27,7 @@ class SongController extends Controller
 
     public function songPage()
     {
-        return view("templates.layout");
+        return view("templates.song");
     }
 
     public function getToken()
@@ -423,7 +423,7 @@ class SongController extends Controller
 
             $title = $request->input("title");
             $songs = Song::where("title", "like", "%" . $title . "%")
-                ->where("user_id", )
+                ->where("user_id", $userId)
                 ->latest()
                 ->get();
             return response()->json(["data" => $songs, "status" => "success"]);

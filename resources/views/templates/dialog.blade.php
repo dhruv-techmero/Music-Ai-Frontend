@@ -285,6 +285,12 @@
               }));
               closeDrawer();
             }, 500);
+
+            // Clear all form fields
+            document.getElementById('suno-title-music').value = '';
+            document.getElementById('style-of-music').value = '';
+            document.querySelector('.dialog-custom-lyrics').value = '';
+            document.querySelector('.dialog-description').value = '';
           },
           error: function(xhr, status, error) {
             clearInterval(progressInterval);
@@ -356,7 +362,8 @@
               // Clear form fields
               document.getElementById('suno-title-music').value = '';
               document.getElementById('style-of-music').value = '';
-              document.querySelector('textarea[placeholder*="Write your own lyrics"]').value = '';
+              document.querySelector('.dialog-custom-lyrics').value = '';
+              document.querySelector('.dialog-description').value = '';
           })
           .catch(error => {
               console.error('Error:', error);

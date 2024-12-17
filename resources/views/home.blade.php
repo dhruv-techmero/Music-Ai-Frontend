@@ -40,13 +40,15 @@
                         <div class="w-full flex flex-col items-start">
                           <div class="w-full flex items-start justify-between">
                             <p class="w-[90%] font-semibold transition duration-500 hover:text-emerald-600 line-clamp-1">{{ $song['title'] }}</p>
-                            <span title="Collect">
-                              <svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-4 mt-0.5 fill-white group-hover:fill-rose-500 transition duration-500" preserveAspectRatio="none">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M908.8 214.4c-9.6-12.8-19.2-22.4-28.8-32-112-115.2-230.4-105.6-342.4-16-9.6 6.4-19.2 16-28.8 25.6-9.6-9.6-19.2-16-28.8-25.6-112-86.4-230.4-99.2-342.4 16-9.6 9.6-19.2 19.2-25.6 32-134.4 195.2-60.8 387.2 137.6 560 44.8 38.4 89.6 73.6 137.6 102.4 16 9.6 32 19.2 44.8 28.8 9.6 6.4 12.8 9.6 19.2 9.6 3.2 3.2 6.4 3.2 12.8 6.4 3.2 3.2 9.6 3.2 16 6.4 25.6 6.4 64 3.2 89.6-12.8 3.2 0 9.6-3.2 16-9.6 12.8-6.4 28.8-16 44.8-28.8 48-28.8 92.8-64 137.6-102.4C969.6 598.4 1043.2 406.4 908.8 214.4zM736 732.8c-41.6 35.2-86.4 70.4-131.2 99.2-16 9.6-28.8 19.2-44.8 25.6-6.4 3.2-12.8 6.4-16 9.6-6.4 3.2-16 6.4-25.6 9.6-3.2 0-6.4 0-9.6 0-6.4 0-12.8 0-16 0-3.2 0-3.2 0-3.2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0-3.2 0-3.2-3.2-3.2 0-6.4-3.2-9.6-3.2-3.2-3.2-9.6-6.4-16-9.6-12.8-6.4-28.8-16-44.8-25.6-44.8-28.8-89.6-60.8-131.2-99.2-179.2-160-243.2-323.2-131.2-489.6 6.4-9.6 16-16 22.4-25.6 89.6-96 182.4-86.4 275.2-12.8 9.6 6.4 16 12.8 22.4 19.2 0 0 0 0 0l28.8 32c3.2 3.2 3.2 3.2 6.4 6.4 0 0 0 0 0 0l0 0c3.2-3.2 9.6-9.6 16-16 12.8-12.8 25.6-25.6 41.6-38.4 92.8-73.6 185.6-83.2 275.2 12.8 6.4 9.6 16 16 22.4 25.6C982.4 406.4 918.4 572.8 736 732.8z"></path>
+                            <span title="Collect" class="like-button" data-song-id="{{ $song->id }}" data-liked="{{ $song->is_liked ? 'true' : 'false' }}">
+    <svg aria-hidden="true" viewBox="0 0 1024 1024" class="w-4 mt-0.5 fill-white group-hover:fill-rose-500 transition duration-500" preserveAspectRatio="none" style="{{  $song->is_liked ? 'fill: #f43f5e' : '' }}">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M908.8 214.4c-9.6-12.8-19.2-22.4-28.8-32-112-115.2-230.4-105.6-342.4-16-9.6 6.4-19.2 16-28.8 25.6-9.6-9.6-19.2-16-28.8-25.6-112-86.4-230.4-99.2-342.4 16-9.6 9.6-19.2 19.2-25.6 32-134.4 195.2-60.8 387.2 137.6 560 44.8 38.4 89.6 73.6 137.6 102.4 16 9.6 32 19.2 44.8 28.8 9.6 6.4 12.8 9.6 19.2 9.6 3.2 3.2 6.4 3.2 12.8 6.4 3.2 3.2 9.6 3.2 16 6.4 25.6 6.4 64 3.2 89.6-12.8 3.2 0 9.6-3.2 16-9.6 12.8-6.4 28.8-16 44.8-28.8 48-28.8 92.8-64 137.6-102.4C969.6 598.4 1043.2 406.4 908.8 214.4zM736 732.8c-41.6 35.2-86.4 70.4-131.2 99.2-16 9.6-28.8 19.2-44.8 25.6-6.4 3.2-12.8 6.4-16 9.6-6.4 3.2-16 6.4-25.6 9.6-3.2 0-6.4 0-9.6 0-6.4 0-12.8 0-16 0-3.2 0-3.2 0-3.2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0-3.2 0-3.2-3.2-3.2 0-6.4-3.2-9.6-3.2-3.2-3.2-9.6-6.4-16-9.6-12.8-6.4-28.8-16-44.8-25.6-44.8-28.8-89.6-60.8-131.2-99.2-179.2-160-243.2-323.2-131.2-489.6 6.4-9.6 16-16 22.4-25.6 89.6-96 182.4-86.4 275.2-12.8 9.6 6.4 16 12.8 22.4 19.2 0 0 0 0 0l28.8 32c3.2 3.2 3.2 3.2 6.4 6.4 0 0 0 0 0 0l0 0c3.2-3.2 9.6-9.6 16-16 12.8-12.8 25.6-25.6 41.6-38.4 92.8-73.6 185.6-83.2 275.2 12.8 6.4 9.6 16 16 22.4 25.6C982.4 406.4 918.4 572.8 736 732.8z"></path>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M908.8 214.4c-9.6-12.8-19.2-22.4-28.8-32-112-115.2-230.4-105.6-342.4-16-9.6 6.4-19.2 16-28.8 25.6-9.6-9.6-19.2-16-28.8-25.6-112-86.4-230.4-99.2-342.4 16-9.6 9.6-19.2 19.2-25.6 32-134.4 195.2-60.8 387.2 137.6 560 44.8 38.4 89.6 73.6 137.6 102.4 16 9.6 32 19.2 44.8 28.8 9.6 6.4 12.8 9.6 19.2 9.6 3.2 3.2 6.4 3.2 12.8 6.4 3.2 3.2 9.6 3.2 16 6.4 25.6 6.4 64 3.2 89.6-12.8 3.2 0 9.6-3.2 16-9.6 12.8-6.4 28.8-16 44.8-28.8 48-28.8 92.8-64 137.6-102.4C969.6 598.4 1043.2 406.4 908.8 214.4zM736 732.8c-41.6 35.2-86.4 70.4-131.2 99.2-16 9.6-28.8 19.2-44.8 25.6-6.4 3.2-12.8 6.4-16 9.6-6.4 3.2-16 6.4-25.6 9.6-3.2 0-6.4 0-9.6 0-6.4 0-12.8 0-16 0-3.2 0-3.2 0-3.2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0-3.2 0-3.2-3.2-3.2 0-6.4-3.2-9.6-3.2-3.2-3.2-9.6-6.4-16-9.6-12.8-6.4-28.8-16-44.8-25.6-44.8-28.8-89.6-60.8-131.2-99.2-179.2-160-243.2-323.2-131.2-489.6 6.4-9.6 16-16 22.4-25.6 89.6-96 182.4-86.4 275.2-12.8 9.6 6.4 16 12.8 22.4 19.2 0 0 0 0 0l28.8 32c3.2 3.2 3.2 3.2 6.4 6.4 0 0 0 0 0 0l0 0c3.2-3.2 9.6-9.6 16-16 12.8-12.8 25.6-25.6 41.6-38.4 92.8-73.6 185.6-83.2 275.2 12.8 6.4 9.6 16 16 22.4 25.6C982.4 406.4 918.4 572.8 736 732.8z"></path>
                               </svg>
                             </span>
-                            
+                            <span class="likes-count-{{ $song->id }}">{{ $song->likes_count }}</span>
+
+
                           </div>
                         </div>
                         
@@ -496,10 +498,10 @@ $(document).ready(function() {
     const audioElement = $('audio')[0];
     
     // Show audio player if hidden
-    if (!isAudioPlayerVisible) {
-      audioPlayer.css('display', 'flex').hide().fadeIn(300);
-      isAudioPlayerVisible = true;
-    }
+    // if (!isAudioPlayerVisible) {
+    //   audioPlayer.css('display', 'flex').hide().fadeIn(300);
+    //   isAudioPlayerVisible = true;
+    // }
 
     // If clicking the same song that's currently playing
     if (currentPlayButton === this) {
@@ -618,6 +620,47 @@ $(document).ready(function() {
     audioPlayer.hide();
     isAudioPlayerVisible = false;
   }
+});
+
+
+</script><script>
+$(document).ready(function() {
+    $('.like-button').click(function() {
+        var button = $(this);
+        var songId = button.data('song-id');
+        var isLiked = button.data('liked') ;
+        var url = '{{ env('ROUTE_URL') }}website/song/like/' + songId;
+        var method = isLiked ? 'DELETE' : 'POST';
+        var userId = '{{ auth()->id() }}';
+      if (!userId) {
+            alert('Please login to like songs');
+            return;
+        }
+        $.ajax({
+            url: url,
+            type: method,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                user_id: userId
+            },
+            success: function(response) {
+                if (response.success) {
+                    button.data('liked', !isLiked);
+                    $('.likes-count-' + songId).text(response.likes_count);
+                    if (!isLiked) {
+                        button.find('svg').css('fill', '#f43f5e');
+                    } else {
+                        button.find('svg').css('fill', '');
+                    }
+                }
+            },
+            error: function(xhr) {
+                alert('Please login to like songs');
+            }
+        });
+    });
 });
 </script>
 @endsection
